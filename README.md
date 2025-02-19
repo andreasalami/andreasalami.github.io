@@ -8,7 +8,7 @@ Welcome to my first personal website! Here you can find:
 - 💻 **My coding skills**: Discover the technologies I know
 - 🎗 **Two sections about volunteering and passions**: Sharing my efforts and interests
 
-🌐 From here you can access my [CV](#) and my social network links like [LinkedIn](#), [GitHub](#), and [X](#).
+🌐 From here you can access my CV and my social network links like LinkedIn, GitHub, and X.
 
 📬 There's also a simple form if you want to reach me with a message.
 
