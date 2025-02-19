@@ -1,0 +1,395 @@
+$primary-color:rgb(226, 218, 214);
+$secondary-color:rgb(76, 123, 139);
+$third-color:rgb(245, 237, 237);
+$fourth-color:rgb(56, 60, 65);
+$text-color:rgb(56, 60, 65);
+$font-stack: "Roboto", sans-serif;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-style {
+  background-color: $primary-color;
+  color: $third-color !important;
+  padding: 12px 15px;
+  margin: 6px 10px;
+  font-family: $font-stack;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 12px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  float: right;
+  position: relative;
+  cursor: pointer;
+}
+
+@mixin text-style {
+  font-family: $font-stack;
+  font-weight: 300;
+  font-style: normal;
+  text-align: left;
+  color: $text-color;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+/* From here top and bottom bar css */
+
+.top-bar, .bottom-bar, .social-links, .menu-toggle-label, .menu-items a {
+  background-color: $primary-color;
+}
+
+.top-bar {
+  position: fixed;
+  background-color: $primary-color;
+  width: 100%;
+  height: 60px;
+  min-height: 60px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.bottom-bar {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: flex-start;
+  font-family: $font-stack;
+  font-weight: 400;
+  border-top: solid 1px $fourth-color;
+}
+
+.home {
+  @include button-style;
+  float: left;
+}
+
+.cv {
+  @include button-style;
+  border-radius: 12px;
+  float: right;
+}
+
+.contact {
+  @include button-style;
+  color: $third-color !important;
+  border: solid 1px $fourth-color;
+  border-radius: 12px;
+}
+
+.background {
+  background-color: $primary-color;
+  width: 100%;
+  height: fit-content;
+}
+
+.social-links {
+  background-color:$primary-color; 
+  color: $text-color !important;  
+  font-family: "Roboto", sans-serif;
+  font-weight: 400; 
+  margin-left: 50px;
+  padding-top: 20px;
+}
+
+/* From here specific css sticky menu */
+
+.sticky-menu {
+  background-color: $primary-color;
+  color: $text-color;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-toggle-label {
+  @include flex-center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: $text-color !important;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.menu-toggle-label::before {
+  content: "✖";
+  position: absolute;
+  transform: rotate(45deg);
+  font-size: 24px;
+  line-height: 60px;
+  transition: transform 0.3s;
+}
+
+#menu-toggle:checked + .menu-toggle-label::before {
+  content: "✖";
+  transform: rotate(0deg);
+}
+
+.menu-items {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu-toggle:checked ~ .menu-items {
+  display: block;
+}
+
+.menu-items li {
+  margin-bottom: 10px;
+}
+
+.menu-items a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-color: $primary-color;
+  border-radius: 50%;
+  color: $text-color;
+  font-family: $font-stack;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  text-align: center;
+  line-height: 60px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* From here specific css index */
+
+.bio, .coding, .volontar, .hobbies {
+  @include flex-center;
+}
+
+.bio {
+  background-color: $third-color;
+  color: $text-color;
+  width: 100%;
+  height: fit-content;
+  padding-top: 80px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+
+  .profile-image {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-style: solid;
+      border-width: 5px;
+      border-radius: 50%;
+    }
+  }
+
+  .bio-text {
+    @include text-style;
+    max-height: 100%;
+  }
+
+  .empty-space {
+    background-color: $third-color;
+    width: 100%;
+  }
+}
+
+.coding {
+  @include text-style();
+  background-color: $primary-color;
+  color: black;
+  width: 100%;
+  height: fit-content;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  padding-left: 10%;
+}
+
+.volontar, .hobbies {
+  @include text-style();
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // Centra verticalmente il contenuto
+  align-items: center; // Centra orizzontalmente il contenuto
+  padding-top: 20px; // Imposta lo spazio in alto
+  padding-bottom: 20px;
+  min-height: 380px;
+}
+
+.volontar {
+  background-color: $third-color;
+  min-height: 380px;
+}
+
+.hobbies {
+  background-color: $fourth-color;
+  color: $primary-color;
+  min-height: 380px;
+}
+
+
+/* From here specific css curriculum */ 
+
+.curriculum-box {
+  width: 70%;
+  height: fit-content;
+  background-color: $third-color;
+  font-family: $font-stack;
+  color: $text-color;
+  text-align: center;
+  margin: 0 40px;
+  padding-top: 72px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 24px; 
+  margin-right: 0px;
+  /*box-shadow: 0px 5px 5px $text-color;*/
+}
+
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: $text-color;
+}
+
+header p {
+  margin: 5px 0;
+  color: $text-color;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+section h2 {
+  border-bottom: 2px solid $text-color;
+  padding-bottom: 10px;
+  color: $text-color;
+}
+
+section p {
+  margin: 10px 0;
+}
+
+/* From here specific css form */
+
+.compile-box {
+  width: 80%;
+  height: fit-content;
+  min-height: 1200px;
+  background-color: $third-color;
+  color: $text-color;
+  border-radius: 3px;
+  padding-top: 100px;
+  padding-left: 50px;
+  padding-right: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
+  font-family: $font-stack;
+  text-align: left;
+  text-decoration: none;
+  font-size: 16px;
+  box-sizing: border-box;
+  /*box-shadow: 0px 5px 5px $text-color;*/
+}
+
+.compile {
+  min-height: 40px;
+  width: 80%;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+} 
+
+.compile input[type='text'],
+.compile input[type='email'] {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid $fourth-color;
+  border-radius: 3px;
+  width: 30%;
+  padding: 7px;
+  font-size: 14px;
+}
+
+.submit {
+  @include button-style;
+  color: $fourth-color !important;
+  border: solid 1px $fourth-color;
+  font-size: medium;
+  position: relative;
+}
+
+
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .bio, .coding {
+    width: 100%;
+  }
+  .volontar, .hobbies {
+    width: 50%;
+    float: left;
+    min-height: 800px;
+  }
+}
+
+@media only screen and (min-width: 961px) {
+  .bio, .coding {
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+  }
+  .volontar, .hobbies {
+    width: 50%;
+    height: 500px;
+    float: left;
+  }
+}

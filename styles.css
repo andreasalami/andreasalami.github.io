@@ -1,0 +1,431 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: rgb(56, 60, 65);
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* From here top and bottom bar css */
+.top-bar, .bottom-bar, .social-links, .menu-toggle-label, .menu-items a {
+  background-color: rgb(226, 218, 214);
+}
+
+.top-bar {
+  position: fixed;
+  background-color: rgb(226, 218, 214);
+  width: 100%;
+  height: 60px;
+  min-height: 60px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.bottom-bar {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: flex-start;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  border-top: solid 1px rgb(56, 60, 65);
+}
+
+.home {
+  background-color: rgb(226, 218, 214);
+  color: rgb(245, 237, 237) !important;
+  padding: 12px 15px;
+  margin: 6px 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 12px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  float: right;
+  position: relative;
+  cursor: pointer;
+  float: left;
+}
+
+.cv {
+  background-color: rgb(226, 218, 214);
+  color: rgb(245, 237, 237) !important;
+  padding: 12px 15px;
+  margin: 6px 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 12px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  float: right;
+  position: relative;
+  cursor: pointer;
+  border-radius: 12px;
+  float: right;
+}
+
+.contact {
+  background-color: rgb(226, 218, 214);
+  color: rgb(245, 237, 237) !important;
+  padding: 12px 15px;
+  margin: 6px 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 12px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  float: right;
+  position: relative;
+  cursor: pointer;
+  color: rgb(245, 237, 237) !important;
+  border: solid 1px rgb(56, 60, 65);
+  border-radius: 12px;
+}
+
+.background {
+  background-color: rgb(226, 218, 214);
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.social-links {
+  background-color: rgb(226, 218, 214);
+  color: rgb(56, 60, 65) !important;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  margin-left: 50px;
+  padding-top: 20px;
+}
+
+/* From here specific css sticky menu */
+.sticky-menu {
+  background-color: rgb(226, 218, 214);
+  color: rgb(56, 60, 65);
+  border-radius: 50%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-toggle-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: rgb(56, 60, 65) !important;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.menu-toggle-label::before {
+  content: "✖";
+  position: absolute;
+  transform: rotate(45deg);
+  font-size: 24px;
+  line-height: 60px;
+  transition: transform 0.3s;
+}
+
+#menu-toggle:checked + .menu-toggle-label::before {
+  content: "✖";
+  transform: rotate(0deg);
+}
+
+.menu-items {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu-toggle:checked ~ .menu-items {
+  display: block;
+}
+
+.menu-items li {
+  margin-bottom: 10px;
+}
+
+.menu-items a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(226, 218, 214);
+  border-radius: 50%;
+  color: rgb(56, 60, 65);
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  text-align: center;
+  line-height: 60px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* From here specific css index */
+.bio, .coding, .volontar, .hobbies {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bio {
+  background-color: rgb(245, 237, 237);
+  color: rgb(56, 60, 65);
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-top: 80px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+}
+.bio .profile-image {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+.bio .profile-image img {
+  max-width: 100%;
+  height: auto;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 50%;
+}
+.bio .bio-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  text-align: left;
+  color: rgb(56, 60, 65);
+  max-height: 100%;
+}
+.bio .empty-space {
+  background-color: rgb(245, 237, 237);
+  width: 100%;
+}
+
+.coding {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  text-align: left;
+  color: rgb(56, 60, 65);
+  background-color: rgb(226, 218, 214);
+  color: black;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  padding-left: 10%;
+}
+
+.volontar, .hobbies {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  text-align: left;
+  color: rgb(56, 60, 65);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: 380px;
+}
+
+.volontar {
+  background-color: rgb(245, 237, 237);
+  min-height: 380px;
+}
+
+.hobbies {
+  background-color: rgb(56, 60, 65);
+  color: rgb(226, 218, 214);
+  min-height: 380px;
+}
+
+/* From here specific css curriculum */
+.curriculum-box {
+  width: 70%;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: rgb(245, 237, 237);
+  font-family: "Roboto", sans-serif;
+  color: rgb(56, 60, 65);
+  text-align: center;
+  margin: 0 40px;
+  padding-top: 72px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 24px;
+  margin-right: 0px;
+  /*box-shadow: 0px 5px 5px $text-color;*/
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: rgb(56, 60, 65);
+}
+
+header p {
+  margin: 5px 0;
+  color: rgb(56, 60, 65);
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+section h2 {
+  border-bottom: 2px solid rgb(56, 60, 65);
+  padding-bottom: 10px;
+  color: rgb(56, 60, 65);
+}
+
+section p {
+  margin: 10px 0;
+}
+
+/* From here specific css form */
+.compile-box {
+  width: 80%;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 1200px;
+  background-color: rgb(245, 237, 237);
+  color: rgb(56, 60, 65);
+  border-radius: 3px;
+  padding-top: 100px;
+  padding-left: 50px;
+  padding-right: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  text-decoration: none;
+  font-size: 16px;
+  box-sizing: border-box;
+  /*box-shadow: 0px 5px 5px $text-color;*/
+}
+
+.compile {
+  min-height: 40px;
+  width: 80%;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.compile input[type=text],
+.compile input[type=email] {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(56, 60, 65);
+  border-radius: 3px;
+  width: 30%;
+  padding: 7px;
+  font-size: 14px;
+}
+
+.submit {
+  background-color: rgb(226, 218, 214);
+  color: rgb(245, 237, 237) !important;
+  padding: 12px 15px;
+  margin: 6px 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 12px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  float: right;
+  position: relative;
+  cursor: pointer;
+  color: rgb(56, 60, 65) !important;
+  border: solid 1px rgb(56, 60, 65);
+  font-size: medium;
+  position: relative;
+}
+
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .bio, .coding {
+    width: 100%;
+  }
+  .volontar, .hobbies {
+    width: 50%;
+    float: left;
+    min-height: 800px;
+  }
+}
+@media only screen and (min-width: 961px) {
+  .bio, .coding {
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+  }
+  .volontar, .hobbies {
+    width: 50%;
+    height: 500px;
+    float: left;
+  }
+}/*# sourceMappingURL=styles.css.map */
