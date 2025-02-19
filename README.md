@@ -14,8 +14,6 @@ Welcome to my first personal website! Here you can find:
 
 This website was created using only HTML and CSS to meet the assignment requirements, but this is only the first step. Over time, I will surely update this project to better match my style and add new features!
 
-<<<<<<< HEAD
-✨ **Thank you for visiting!**
-=======
-✨ **Thank you for visiting!**
+
+**Thank you for visiting!**
 
