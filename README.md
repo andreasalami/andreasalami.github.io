@@ -18,4 +18,4 @@ This website was created using only HTML and CSS to meet the assignment requirem
 ✨ **Thank you for visiting!**
 =======
 ✨ **Thank you for visiting!**
->>>>>>> de7460d279d9a86ab77d386fb48853599b07d583
+
