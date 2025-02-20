@@ -80,7 +80,7 @@ a {
   justify-content: flex-start;
   font-family: $font-stack;
   font-weight: 400;
-  border-top: solid 1px $fourth-color;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3)
 }
 
 .home {
@@ -96,8 +96,9 @@ a {
 
 .contact {
   @include button-style;
-  color: $third-color !important;
-  border: solid 1px $fourth-color;
+  background-color: $third-color;
+  color: $third-color;
+  border: none;
   border-radius: 12px;
 }
 
@@ -360,8 +361,9 @@ section p {
 
 .submit {
   @include button-style;
-  color: $fourth-color !important;
-  border: solid 1px $fourth-color;
+  background-color: $fourth-color;
+  color: $third-color !important;
+  border: none;
   font-size: medium;
   position: relative;
 }

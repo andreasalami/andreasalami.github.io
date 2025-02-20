@@ -38,7 +38,7 @@ a {
   justify-content: flex-start;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  border-top: solid 1px rgb(56, 60, 65);
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
 .home {
@@ -105,8 +105,9 @@ a {
   float: right;
   position: relative;
   cursor: pointer;
-  color: rgb(245, 237, 237) !important;
-  border: solid 1px rgb(56, 60, 65);
+  background-color: rgb(245, 237, 237);
+  color: rgb(245, 237, 237);
+  border: none;
   border-radius: 12px;
 }
 
@@ -398,8 +399,9 @@ section p {
   float: right;
   position: relative;
   cursor: pointer;
-  color: rgb(56, 60, 65) !important;
-  border: solid 1px rgb(56, 60, 65);
+  background-color: rgb(56, 60, 65);
+  color: rgb(245, 237, 237) !important;
+  border: none;
   font-size: medium;
   position: relative;
 }
