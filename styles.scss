@@ -218,11 +218,14 @@ a {
     padding-left: 10%;
     padding-right: 30px;
     padding-bottom: 30px;
+    border-radius: 50%;
 
     img {
+      min-width: 65px;
+      min-height: 65px;
       max-width: auto;
       height: auto;
-      border-radius: 49%;
+      border-radius: 50%;
     }
   }
 
