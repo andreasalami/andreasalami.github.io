@@ -239,6 +239,9 @@ a {
   max-width: auto;
   height: auto;
   border-radius: 50%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .bio .bio-text {
   font-family: "Roboto", sans-serif;
@@ -410,7 +413,14 @@ section p {
 }
 
 @media only screen and (min-width: 401px) and (max-width: 960px) {
-  .bio, .coding {
+  .bio {
+    width: 100%;
+  }
+  .bio .profile-image {
+    min-width: 100px;
+    min-height: 100px;
+  }
+  .coding {
     width: 100%;
   }
   .volontar, .hobbies {
