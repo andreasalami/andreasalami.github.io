@@ -52,6 +52,11 @@ a {
   background-color: transparent;
 }
 
+h2 {
+  font-size: 2em;
+  font-weight: 800;
+}
+
 .page {
   display: flex;
   flex-wrap: wrap;
@@ -72,6 +77,7 @@ a {
   height: 60px;
   min-height: 60px;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
 
 .bottom-bar {
@@ -84,19 +90,28 @@ a {
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3)
 }
 
+.logo {
+  float: left;
+  max-width: 60px;
+  max-height: 60px;
+  margin-left: 20px;
+}
+
 .home {
   @include button-style;
-  float: left;
+  float: center;
 }
 
 .cv {
   @include button-style;
+  float: center;
   border-radius: 12px;
-  float: right;
+
 }
 
 .contact {
   @include button-style;
+  float: center;
   background-color: $third-color;
   color: $third-color;
   border: none;
@@ -246,12 +261,20 @@ a {
 .coding {
   @include text-style();
   background-color: $primary-color;
-  color: black;
+  color: $text-color; 
   width: 100%;
   height: fit-content;
   padding-top: 20px;
   padding-bottom: 30px;
   padding-left: 10%;
+   
+  .skills  {
+    height: fit-content;
+    color: $text-color;
+    padding-top: 0px;
+    padding-bottom: 30px;
+    padding-right: 0px;
+  }
 }
 
 .volontar, .hobbies {
@@ -386,6 +409,10 @@ section p {
 
 
 @media only screen and (min-width: 401px) and (max-width: 960px) {
+  h2 {
+    font-size: 1.5em;
+  }
+
   .bio {
     width: 100%;
     .profile-image {
