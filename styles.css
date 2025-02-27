@@ -56,28 +56,6 @@ h2 {
   margin-left: 20px;
 }
 
-.home {
-  background-color: rgb(226, 218, 214);
-  color: rgb(245, 237, 237) !important;
-  padding: 12px 15px;
-  margin: 6px 10px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  text-align: center;
-  text-decoration: none;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 12px;
-  margin-bottom: 0px;
-  margin-right: 0px;
-  float: right;
-  position: relative;
-  cursor: pointer;
-  float: center;
-}
-
 .cv {
   background-color: rgb(226, 218, 214);
   color: rgb(245, 237, 237) !important;
@@ -97,7 +75,8 @@ h2 {
   float: right;
   position: relative;
   cursor: pointer;
-  float: center;
+  background-color: transparent;
+  float: right;
   border-radius: 12px;
 }
 
@@ -120,7 +99,7 @@ h2 {
   float: right;
   position: relative;
   cursor: pointer;
-  float: center;
+  float: right;
   background-color: rgb(245, 237, 237);
   color: rgb(245, 237, 237);
   border: none;
@@ -382,8 +361,8 @@ section p {
   padding-top: 100px;
   padding-left: 50px;
   padding-right: 30px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
   font-family: "Roboto", sans-serif;
   text-align: left;
   text-decoration: none;

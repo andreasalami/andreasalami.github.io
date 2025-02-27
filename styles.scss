@@ -97,22 +97,17 @@ h2 {
   margin-top: 5px;
   margin-left: 20px;
 }
-
-.home {
-  @include button-style;
-  float: center;
-}
-
 .cv {
   @include button-style;
-  float: center;
+  background-color: transparent;
+  float: right;
   border-radius: 12px;
 
 }
 
 .contact {
   @include button-style;
-  float: center;
+  float: right;
   background-color: $third-color;
   color: $third-color;
   border: none;
@@ -361,8 +356,8 @@ section p {
   padding-top: 100px;
   padding-left: 50px;
   padding-right: 30px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
   font-family: $font-stack;
   text-align: left;
   text-decoration: none;
