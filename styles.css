@@ -443,7 +443,7 @@ section p {
   .volontar, .hobbies {
     width: 50%;
     float: left;
-    min-height: 1000px;
+    min-height: 1100px;
   }
 }
 @media only screen and (min-width: 961px) {
