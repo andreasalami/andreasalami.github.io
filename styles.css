@@ -165,6 +165,7 @@ h2 {
 }
 
 .menu-items {
+  color: rgb(56, 60, 65);
   display: none;
   position: absolute;
   bottom: 70px;
@@ -442,7 +443,7 @@ section p {
   .volontar, .hobbies {
     width: 50%;
     float: left;
-    min-height: 800px;
+    min-height: 1000px;
   }
 }
 @media only screen and (min-width: 961px) {
