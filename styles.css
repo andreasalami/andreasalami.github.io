@@ -200,6 +200,10 @@ h2 {
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
+.bi {
+  font-size: 20px;
+}
+
 /* From here specific css index */
 .bio, .coding, .volontar, .hobbies {
   display: flex;
