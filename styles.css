@@ -273,7 +273,7 @@ h2 {
   color: rgb(56, 60, 65);
   padding-top: 0px;
   padding-bottom: 30px;
-  padding-right: 0px;
+  padding-left: 10px;
 }
 
 .volontar, .hobbies {
@@ -304,20 +304,19 @@ h2 {
 
 /* From here specific css curriculum */
 .curriculum-box {
-  width: 70%;
+  width: 90%;
   height: -moz-fit-content;
   height: fit-content;
   background-color: rgb(245, 237, 237);
   font-family: "Roboto", sans-serif;
   color: rgb(56, 60, 65);
   text-align: center;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 5%;
+  margin-right: 10%;
   padding-top: 72px;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 24px;
-  margin-right: 0px;
 }
 
 header {
@@ -352,17 +351,17 @@ section p {
 
 /* From here specific css form */
 .compile-box {
-  width: 80%;
+  width: 90%;
   height: -moz-fit-content;
   height: fit-content;
-  min-height: 1200px;
   background-color: rgb(245, 237, 237);
   color: rgb(56, 60, 65);
+  min-height: 850px;
   border-radius: 3px;
   padding-top: 100px;
   padding-left: 50px;
   padding-right: 30px;
-  margin-left: 10%;
+  margin-left: 5%;
   margin-right: 10%;
   font-family: "Roboto", sans-serif;
   text-align: left;
@@ -447,6 +446,14 @@ section p {
     min-height: 1100px;
   }
 }
+@media only screen and (min-width: 790px) and (max-width: 960px) {
+  .compile-box {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    min-height: 1200px;
+  }
+}
 @media only screen and (min-width: 961px) {
   .bio, .coding {
     width: 100%;
@@ -457,5 +464,16 @@ section p {
     width: 50%;
     height: 500px;
     float: left;
+  }
+  .curriculum-box {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .compile-box {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    min-height: 1200px;
   }
 }/*# sourceMappingURL=styles.css.map */
