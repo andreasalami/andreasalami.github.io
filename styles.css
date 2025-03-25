@@ -1,4 +1,9 @@
 @charset "UTF-8";
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -78,7 +83,8 @@ h2 {
   cursor: pointer;
   background-color: transparent;
   float: right;
-  border-radius: 12px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .contact {

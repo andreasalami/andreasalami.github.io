@@ -41,6 +41,11 @@ $font-stack: "Roboto", sans-serif;
   color: $text-color;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -102,8 +107,8 @@ h2 {
   @include button-style;
   background-color: transparent;
   float: right;
-  border-radius: 12px;
-
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .contact {
