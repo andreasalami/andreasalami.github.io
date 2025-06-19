@@ -421,7 +421,7 @@ section p {
 .compile-box {
   width: 90%;
   height: 700px;
-  background-color: rgba(150, 150, 150, 0.699);
+  background-color: rgb(226, 218, 214);
   -webkit-backdrop-filter: blur(12px);
           backdrop-filter: blur(12px);
   color: rgb(56, 60, 65);

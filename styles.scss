@@ -419,7 +419,7 @@ section p {
 .compile-box {
   width: 90%;
   height: 700px;  
-  background-color: rgba(150, 150, 150, 0.699);
+  background-color: $primary-color;
   backdrop-filter: blur(12px);
   color: $text-color;
   min-height: 850px;
