@@ -3,6 +3,7 @@ $secondary-color:rgb(76, 123, 139);
 $third-color:rgb(245, 237, 237);
 $fourth-color:rgb(56, 60, 65);
 $text-color:rgb(56, 60, 65);
+$text-color-blur:rgba(56, 60, 65, 0.7);
 $font-stack: "Roboto", sans-serif;
 
 @mixin flex-center {
@@ -26,12 +27,14 @@ $font-stack: "Roboto", sans-serif;
   padding-bottom: 12px;
   padding-left: 20px;
   padding-right: 20px;
-  border-radius: 12px;
+  border-radius: 50%;
   margin-bottom: 0px;
   margin-right: 0px;
   float: right;
   position: relative;
   cursor: pointer;
+  box-shadow: none;
+  outline: none;
 }
 
 @mixin text-style {
@@ -86,16 +89,16 @@ h2 {
   position: fixed;
   background-color: rgba(255,255,255,0.05);
   backdrop-filter: blur(12px);
-  margin-top: 5px;
-  margin-left: 20%;
-  margin-right: 20%;
-  width: 60%;
+  margin-top: 10px;
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
   max-width: 100vw;
-  height: 60px;
+  height: 70px;
   min-height: 60px;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
   z-index: 100;
-  border-radius: 30px;
+  border-radius: 35px;
   transition: transform 0.2s ease;
 
    &:hover {
@@ -126,33 +129,34 @@ h2 {
 }
 .cv {
   @include button-style;
-  background-color: transparent;
+  background-color: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
   float: right;
-  border-radius: 50%;
+  border-radius: 25px;
   margin-right: 10px;
 
    &:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
   }
 }
 
 .contact {
   @include button-style;
+  background-color: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
   float: right;
-  //background-color: transparent;
-  color: $third-color;
-  border: none;
+  margin-right: 10px;
   border-radius: 25px;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
   }
 }
 
 .background {
   background-color: $primary-color;
   width: 100%;
-  height: fit-content;
+  height: 100%;
 }
 
 .social-links {
@@ -173,6 +177,7 @@ h2 {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 10px;
   z-index: 1000;
 }
 
@@ -332,6 +337,16 @@ h2 {
   padding-left: 10%;
 
   }
+.coding-text {
+    @include text-style();
+    max-height: 100%;
+    transition: transform 0.2s ease;
+
+     &:hover {
+      transform: scale(1.05);
+    }
+}
+
 
   .skills  {
     height: fit-content;
@@ -339,6 +354,11 @@ h2 {
     padding-top: 0px;
     padding-bottom: 30px;
     padding-left: 10px;
+    transition: transform 0.2s ease;
+
+     &:hover {
+      transform: scale(1.05);
+    }
 
 }
 
@@ -356,13 +376,27 @@ h2 {
 .volontar {
   background-color: $third-color;
   min-height: 380px;
-  
+
+  .volontar-text {
+    transition: transform 0.2s ease;
+
+     &:hover {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .hobbies {
   background-color: $fourth-color;
   color: $primary-color;
   min-height: 380px;
+  .hobbies-text {
+    transition: transform 0.2s ease;
+
+     &:hover {
+      transform: scale(1.05);
+    }
+  }
 }
 
 
@@ -377,10 +411,10 @@ h2 {
   text-align: center;
   margin-left: 5%;
   margin-right: 10%;
-  padding-top: 72px;
+  padding-top: 100px;
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 24px; 
+  padding-bottom: 25px; 
   border-radius: 25px;
 }
 
@@ -405,7 +439,6 @@ section {
 }
 
 section h2 {
-  border-bottom: 2px solid $text-color;
   padding-bottom: 10px;
   color: $text-color;
 }
@@ -415,12 +448,18 @@ section p {
 }
 
 /* From here specific css form */
+.form-box {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  width: 100%;
+  height: 100%;
+  background-color: $primary-color;
+}
 
 .compile-box {
-  width: 90%;
+  width: 80%;
   height: 700px;  
-  background-color: $primary-color;
-  backdrop-filter: blur(12px);
+  background-color: $third-color;
   color: $text-color;
   min-height: 850px;
   border-radius: 3px;
@@ -434,7 +473,7 @@ section p {
   text-decoration: none;
   font-size: 16px;
   box-sizing: border-box;
-  border-radius: 25px;
+  border-radius: 35px;
 }
 
 .compile {
@@ -451,31 +490,40 @@ section p {
 .compile input[type='email'] {
   background-color: rgb(255, 255, 255);
   border: none;
-  border-radius: 3px;
+  border-radius: 25px;
   width: 90%;
   padding: 7px;
   font-size: 14px;
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: scale(1.02);
+  } 
 }
 
 .compile textarea {
   background-color: rgb(255, 255, 255);
   border: none;
-  border-radius: 3px;
+  border-radius: 25px;
   width: 100%;
   padding: 7px;
   font-size: 14px;
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
 .submit {
   @include button-style;
-  background-color: $fourth-color;
+  background-color: $text-color;
   color: $third-color !important;
+  margin-bottom: 10px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   position: relative;
   transition: transform 0.2s ease;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
 }
 
@@ -533,5 +581,18 @@ section p {
     margin-left: 10%;
     margin-right: 10%;
     min-height: 1200px;
+  }
+  .compile input[type='text'],
+  .compile input[type='email'] {
+    width: 50%;
+  }
+
+  .compile textarea {
+    width: 70%;
+  }
+
+  .submit {
+    width: 100px;
+    margin-right: 100px;
   }
 }
