@@ -156,12 +156,16 @@ h2 {
 }
 
 .social-links {
-  background-color: rgb(226, 218, 214);
+  background-color: transparent;
   color: rgb(56, 60, 65) !important;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   margin-left: 20px;
   padding-top: 20px;
+  transition: transform 0.2s ease;
+}
+.social-links:hover {
+  transform: scale(1.05);
 }
 
 /* From here specific css sticky menu */
@@ -276,7 +280,7 @@ h2 {
   width: 100%;
   height: -moz-fit-content;
   height: fit-content;
-  padding-top: 80px;
+  padding-top: 100px;
   padding-bottom: 15px;
   display: flex;
   flex-direction: row;
@@ -305,7 +309,7 @@ h2 {
   transition: transform 0.2s ease;
 }
 .bio .profile-image img:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 .bio .bio-text {
   font-family: "Roboto", sans-serif;

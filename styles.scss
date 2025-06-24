@@ -160,13 +160,19 @@ h2 {
 }
 
 .social-links {
-  background-color:$primary-color; 
+  background-color:transparent; 
   color: $text-color !important;  
   font-family: "Roboto", sans-serif;
   font-weight: 400; 
   margin-left: 20px;
   padding-top: 20px;
+  transition: transform 0.2s ease;
+
+   &:hover {
+    transform: scale(1.05);
+  }
 }
+
 
 /* From here specific css sticky menu */
 
@@ -278,7 +284,7 @@ h2 {
   color: $text-color;
   width: 100%;
   height: fit-content;
-  padding-top: 80px;
+  padding-top: 100px;
   padding-bottom: 15px;
   display: flex;
   flex-direction: row;
@@ -305,7 +311,7 @@ h2 {
       box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s ease;    
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.2);
       }
     }
   }
