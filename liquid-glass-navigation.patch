@@ -1,0 +1,551 @@
+diff --git a/index.html b/index.html
+index 0000000..0000000 100644
+--- a/index.html
++++ b/index.html
+@@ -38,16 +38,16 @@
+     </head>
+ <body>
+-    <nav class="top-bar">
++    <nav class="top-bar liquid-glass" aria-label="Primary navigation">
+         <div class="logo">
+             <a href="index.html"><img src="images/logo.png" alt="Logo" class="img-fluid"></a>
+         </div>
+         <div class="cv">
+-            <a href="curriculum.html"><i class="bi bi-file-earmark-person"></i></a>
++            <a href="curriculum.html" aria-label="Curriculum"><i class="bi bi-file-earmark-person"></i></a>
+         </div>
+         <div class="contact">
+-            <a href="form.html"><i class="bi bi-envelope"></i></a>
++            <a href="form.html" aria-label="Contact"><i class="bi bi-envelope"></i></a>
+         </div>
+     </nav>
+@@ -173,13 +173,16 @@
+         </div>
+     </div>
+     <div class="sticky-menu">
+-        <input type="checkbox" id="menu-toggle">
+-        <label for="menu-toggle" class="menu-toggle-label"></label>
++        <button
++            type="button"
++            class="menu-toggle-label liquid-glass"
++            aria-label="Open navigation menu"
++            aria-expanded="false"
++            aria-controls="sticky-navigation">
++        </button>
+-        <ul class="menu-items">
++        <ul class="menu-items" id="sticky-navigation">
+             <li><a href="index.html"><i class="bi bi-house"></i></a></li>
+             <li><a href="form.html"><i class="bi bi-envelope"></i></a></li>
+             <li><a href="curriculum.html"><i class="bi bi-file-earmark-person"></i></a></li>
+         </ul>
+     </div>
+@@ -206,5 +209,6 @@
+             </a>
+         </div>
+     </nav>
++    <script src="liquid-glass.js" defer></script>
+ </body>
+ </html>
+diff --git a/styles.scss b/styles.scss
+index 0000000..0000000 100644
+--- a/styles.scss
++++ b/styles.scss
+@@ -576,3 +576,263 @@
+     margin-right: 100px;
+   }
+ }
++
++/* =========================================================
++   LIQUID GLASS NAVIGATION
++   ========================================================= */
++
++:root {
++  --glass-bg: rgba(255, 255, 255, 0.10);
++  --glass-bg-hover: rgba(255, 255, 255, 0.16);
++  --glass-border: rgba(255, 255, 255, 0.28);
++  --glass-border-soft: rgba(255, 255, 255, 0.12);
++  --glass-shadow: rgba(0, 0, 0, 0.20);
++  --glass-highlight: rgba(255, 255, 255, 0.42);
++  --glass-text: rgba(56, 60, 65, 0.92);
++  --glass-ease: cubic-bezier(0.22, 1, 0.36, 1);
++}
++
++/* Shared glass surface */
++.liquid-glass {
++  position: relative;
++  isolation: isolate;
++  overflow: hidden;
++  background:
++    radial-gradient(
++      circle at var(--glass-x, 50%) var(--glass-y, 0%),
++      rgba(255, 255, 255, 0.28) 0%,
++      rgba(255, 255, 255, 0.08) 24%,
++      transparent 52%
++    ),
++    linear-gradient(
++      135deg,
++      rgba(255, 255, 255, 0.16),
++      rgba(255, 255, 255, 0.045)
++    );
++  border: 1px solid var(--glass-border);
++  box-shadow:
++    0 14px 40px var(--glass-shadow),
++    inset 0 1px 0 var(--glass-highlight),
++    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
++  backdrop-filter: blur(24px) saturate(180%);
++  -webkit-backdrop-filter: blur(24px) saturate(180%);
++}
++
++.liquid-glass::before {
++  content: "";
++  position: absolute;
++  inset: 1px;
++  z-index: -1;
++  border-radius: inherit;
++  pointer-events: none;
++  background:
++    radial-gradient(
++      ellipse at 50% -20%,
++      rgba(255, 255, 255, 0.30),
++      transparent 48%
++    );
++  opacity: 0.75;
++}
++
++.liquid-glass::after {
++  content: "";
++  position: absolute;
++  inset: 0;
++  z-index: -1;
++  pointer-events: none;
++  border-radius: inherit;
++  background:
++    linear-gradient(
++      115deg,
++      transparent 25%,
++      rgba(255, 255, 255, 0.14) 48%,
++      transparent 66%
++    );
++  transform: translateX(-110%);
++  transition: transform 900ms var(--glass-ease);
++}
++
++.liquid-glass:hover::after {
++  transform: translateX(110%);
++}
++
++/* Top navigation */
++.top-bar {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 10px;
++  margin-top: 12px;
++  margin-left: 15%;
++  margin-right: 15%;
++  width: 70%;
++  height: 66px;
++  min-height: 66px;
++  padding: 5px 8px 5px 14px;
++  border-radius: 999px;
++  transform: translateY(0) scale(1);
++  transition:
++    transform 500ms var(--glass-ease),
++    width 500ms var(--glass-ease),
++    background 500ms ease,
++    box-shadow 500ms ease;
++}
++
++.top-bar.is-scrolled {
++  transform: translateY(-2px) scale(0.96);
++  width: 64%;
++  background-color: rgba(255, 255, 255, 0.075);
++  box-shadow:
++    0 18px 50px rgba(0, 0, 0, 0.22),
++    inset 0 1px 0 rgba(255, 255, 255, 0.36);
++}
++
++.top-bar .logo {
++  float: none;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  width: 50px;
++  height: 50px;
++  max-width: 50px;
++  max-height: 50px;
++  margin: 0;
++  border-radius: 50%;
++  overflow: hidden;
++  transition: transform 500ms var(--glass-ease);
++}
++
++.top-bar .logo:hover {
++  transform: scale(1.06) rotate(-2deg);
++}
++
++.top-bar .logo img {
++  display: block;
++  width: 100%;
++  height: 100%;
++  object-fit: contain;
++}
++
++.top-bar .cv,
++.top-bar .contact {
++  float: none;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  width: 48px;
++  height: 48px;
++  min-width: 48px;
++  padding: 0;
++  margin: 0;
++  border: 1px solid var(--glass-border-soft);
++  border-radius: 50%;
++  background: rgba(255, 255, 255, 0.075);
++  backdrop-filter: blur(18px) saturate(160%);
++  -webkit-backdrop-filter: blur(18px) saturate(160%);
++  transition:
++    transform 400ms var(--glass-ease),
++    background 300ms ease,
++    box-shadow 300ms ease;
++}
++
++.top-bar .cv a,
++.top-bar .contact a {
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  width: 100%;
++  height: 100%;
++  color: var(--glass-text);
++}
++
++.top-bar .cv:hover,
++.top-bar .contact:hover {
++  transform: translateY(-2px) scale(1.06);
++  background: var(--glass-bg-hover);
++  box-shadow:
++    0 8px 22px rgba(0, 0, 0, 0.12),
++    inset 0 1px 0 rgba(255, 255, 255, 0.42);
++}
++
++/* Sticky liquid menu */
++.sticky-menu {
++  right: 24px;
++  bottom: 24px;
++  width: 64px;
++  height: 64px;
++  border-radius: 50%;
++  box-shadow: none;
++}
++
++.menu-toggle-label {
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  width: 64px;
++  height: 64px;
++  padding: 0;
++  margin: 0;
++  border: 1px solid var(--glass-border);
++  border-radius: 50%;
++  color: var(--glass-text) !important;
++  cursor: pointer;
++  appearance: none;
++  -webkit-appearance: none;
++  transform: scale(1);
++  transition:
++    transform 500ms var(--glass-ease),
++    border-radius 500ms var(--glass-ease),
++    box-shadow 500ms var(--glass-ease);
++}
++
++.menu-toggle-label::before,
++.menu-toggle-label::after {
++  content: "";
++  position: absolute;
++  width: 22px;
++  height: 2px;
++  border-radius: 999px;
++  background: currentColor;
++  box-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
++  transition:
++    transform 500ms var(--glass-ease),
++    width 400ms var(--glass-ease);
++}
++
++.menu-toggle-label::before {
++  transform: translateY(-4px);
++}
++
++.menu-toggle-label::after {
++  transform: translateY(4px);
++}
++
++.sticky-menu.is-open .menu-toggle-label {
++  transform: rotate(90deg);
++  border-radius: 42% 58% 55% 45% / 55% 45% 58% 42%;
++  box-shadow:
++    0 16px 40px rgba(0, 0, 0, 0.22),
++    inset 0 1px 0 rgba(255, 255, 255, 0.42);
++}
++
++.sticky-menu.is-open .menu-toggle-label::before {
++  transform: rotate(45deg);
++}
++
++.sticky-menu.is-open .menu-toggle-label::after {
++  transform: rotate(-45deg);
++}
++
++/* Menu items start as small droplets and expand from the main bubble. */
++.menu-items {
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  gap: 10px;
++  position: absolute;
++  right: 0;
++  bottom: 70px;
++  width: 64px;
++  padding: 0;
++  margin: 0;
++  list-style: none;
++  pointer-events: none;
++}
++
++.menu-items li {
++  width: 56px;
++  height: 56px;
++  margin: 0;
++  opacity: 0;
++  transform:
++    translateY(24px)
++    scale(0.35);
++  transform-origin: center bottom;
++  filter: blur(7px);
++  transition:
++    opacity 260ms ease,
++    transform 600ms var(--glass-ease),
++    filter 450ms ease;
++}
++
++.sticky-menu.is-open .menu-items {
++  pointer-events: auto;
++}
++
++.sticky-menu.is-open .menu-items li {
++  opacity: 1;
++  transform: translateY(0) scale(1);
++  filter: blur(0);
++}
++
++.sticky-menu.is-open .menu-items li:nth-child(1) {
++  transition-delay: 40ms;
++}
++
++.sticky-menu.is-open .menu-items li:nth-child(2) {
++  transition-delay: 90ms;
++}
++
++.sticky-menu.is-open .menu-items li:nth-child(3) {
++  transition-delay: 140ms;
++}
++
++.menu-items a {
++  position: relative;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  width: 56px;
++  height: 56px;
++  border: 1px solid var(--glass-border);
++  border-radius: 50%;
++  color: var(--glass-text);
++  background:
++    radial-gradient(
++      circle at 35% 25%,
++      rgba(255, 255, 255, 0.28),
++      rgba(255, 255, 255, 0.07) 55%,
++      rgba(255, 255, 255, 0.04)
++    );
++  box-shadow:
++    0 10px 28px rgba(0, 0, 0, 0.18),
++    inset 0 1px 0 rgba(255, 255, 255, 0.32);
++  backdrop-filter: blur(20px) saturate(170%);
++  -webkit-backdrop-filter: blur(20px) saturate(170%);
++  line-height: normal;
++  text-shadow: none;
++  transition:
++    transform 350ms var(--glass-ease),
++    border-radius 500ms var(--glass-ease),
++    background 300ms ease;
++}
++
++.menu-items a:hover {
++  transform: scale(1.10) rotate(-3deg);
++  border-radius: 42% 58% 55% 45% / 55% 45% 58% 42%;
++  background: rgba(255, 255, 255, 0.18);
++}
++
++.menu-items .bi {
++  font-size: 19px;
++}
++
++/* Subtle mouse-driven light on the main surfaces. */
++.liquid-glass {
++  --glass-x: 50%;
++  --glass-y: 0%;
++}
++
++/* Accessibility: respect reduced-motion preferences. */
++@media (prefers-reduced-motion: reduce) {
++  .liquid-glass,
++  .liquid-glass::after,
++  .top-bar,
++  .top-bar .logo,
++  .top-bar .cv,
++  .top-bar .contact,
++  .menu-toggle-label,
++  .menu-toggle-label::before,
++  .menu-toggle-label::after,
++  .menu-items li,
++  .menu-items a {
++    transition: none !important;
++    animation: none !important;
++  }
++}
++
++/* Mobile */
++@media only screen and (max-width: 600px) {
++  .top-bar {
++    width: calc(100% - 28px);
++    margin-left: 14px;
++    margin-right: 14px;
++    height: 60px;
++    min-height: 60px;
++    padding-left: 10px;
++  }
++
++  .top-bar.is-scrolled {
++    width: calc(100% - 44px);
++  }
++
++  .top-bar .logo {
++    width: 44px;
++    height: 44px;
++  }
++
++  .top-bar .cv,
++  .top-bar .contact {
++    width: 44px;
++    height: 44px;
++    min-width: 44px;
++  }
++
++  .sticky-menu {
++    right: 16px;
++    bottom: 16px;
++  }
++}
+diff --git a/liquid-glass.js b/liquid-glass.js
+new file mode 100644
+--- /dev/null
++++ b/liquid-glass.js
+@@ -0,0 +1,100 @@
++(() => {
++  "use strict";
++
++  const topBar = document.querySelector(".top-bar");
++  const stickyMenu = document.querySelector(".sticky-menu");
++  const menuToggle = document.querySelector(".menu-toggle-label");
++  const menuLinks = document.querySelectorAll(".menu-items a");
++  const glassSurfaces = document.querySelectorAll(".liquid-glass");
++
++  if (!topBar || !stickyMenu || !menuToggle) {
++    return;
++  }
++
++  /* ---------------------------------------------------------
++     Navbar scroll state
++     --------------------------------------------------------- */
++  let ticking = false;
++
++  const updateScrollState = () => {
++    topBar.classList.toggle("is-scrolled", window.scrollY > 40);
++    ticking = false;
++  };
++
++  window.addEventListener(
++    "scroll",
++    () => {
++      if (!ticking) {
++        window.requestAnimationFrame(updateScrollState);
++        ticking = true;
++      }
++    },
++    { passive: true }
++  );
++
++  updateScrollState();
++
++  /* ---------------------------------------------------------
++     Sticky liquid menu
++     --------------------------------------------------------- */
++  const closeMenu = () => {
++    stickyMenu.classList.remove("is-open");
++    menuToggle.setAttribute("aria-expanded", "false");
++    menuToggle.setAttribute("aria-label", "Open navigation menu");
++  };
++
++  const toggleMenu = () => {
++    const isOpen = stickyMenu.classList.toggle("is-open");
++
++    menuToggle.setAttribute("aria-expanded", String(isOpen));
++    menuToggle.setAttribute(
++      "aria-label",
++      isOpen ? "Close navigation menu" : "Open navigation menu"
++    );
++  };
++
++  menuToggle.addEventListener("click", toggleMenu);
++
++  menuLinks.forEach((link) => {
++    link.addEventListener("click", closeMenu);
++  });
++
++  document.addEventListener("click", (event) => {
++    if (!stickyMenu.contains(event.target)) {
++      closeMenu();
++    }
++  });
++
++  document.addEventListener("keydown", (event) => {
++    if (event.key === "Escape") {
++      closeMenu();
++      menuToggle.focus();
++    }
++  });
++
++  /* ---------------------------------------------------------
++     Mouse-driven glass highlight
++     --------------------------------------------------------- */
++  glassSurfaces.forEach((surface) => {
++    surface.addEventListener("pointermove", (event) => {
++      const rect = surface.getBoundingClientRect();
++      const x = ((event.clientX - rect.left) / rect.width) * 100;
++      const y = ((event.clientY - rect.top) / rect.height) * 100;
++
++      surface.style.setProperty("--glass-x", `${x}%`);
++      surface.style.setProperty("--glass-y", `${y}%`);
++    });
++
++    surface.addEventListener("pointerleave", () => {
++      surface.style.setProperty("--glass-x", "50%");
++      surface.style.setProperty("--glass-y", "0%");
++    });
++  });
++})();
