@@ -8,6 +8,7 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="home-liquid-glass.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> 
@@ -39,27 +40,28 @@
     <meta property="og:url" content="https://www.instagram.com/lagroaigiovani/">
     <meta property="og:type" content="profile">
 </head>
-<body>
-    <nav class="top-bar">
+<body class="home-page curriculum-page">
+    <nav class="top-bar liquid-glass" aria-label="Primary navigation">
         <div class="logo">
-            <a href="index.html"><img src="images/logo.png" alt="Logo" class="img-fluid"></a>           
+            <a href="index.html" aria-label="Home"><img src="images/logo.png" alt="Andrea Salami" class="img-fluid"></a>
         </div>
         <div class="cv">
-            <a href="curriculum.html"><i class="bi bi-file-earmark-person"></i></a>           
+            <a href="curriculum.html" aria-label="Curriculum" aria-current="page"><i class="bi bi-file-earmark-person nav-icon" data-lucide="file-user" aria-hidden="true"></i></a>
         </div>
         <div class="contact">
-            <a href="form.html"><i class="bi bi-envelope"></i></a>            
+            <a href="form.html" aria-label="Contact me"><i class="bi bi-send nav-icon" data-lucide="send" aria-hidden="true"></i></a>
         </div>
     </nav>
     <div class="background">         
         <div class="curriculum-box">
             <header>
+                <p class="cv-kicker">Curriculum vitae</p>
                 <h1>Andrea Salami</h1>
+                <p class="cv-location">Cremona, Italy</p>
             </header>
-            <br>
             <section>
                 <h2>Work Experience</h2>
-                <br>
+                <div class="curriculum-section-content">
                 <p>Syntralink<br>
                 Copywriter | Remote, Italy July 2024 - January 2025<br>
                 <em>Crafting compelling and effective written articles to drive engagement and technical education</em></p>
@@ -81,11 +83,11 @@
                 <p>EnviTec Biogas Italia S.r.l.<br>
                 Biomass Operator | Cremona, Italy July 2015<br>
                 <em>Worker in various operative activities</em></p>
+                </div>
             </section>
-            <br>
             <section>
                 <h2>Education</h2>
-                <br>
+                <div class="curriculum-section-content">
                 <p>Start2Imact University | January 2021 - Present<br>
                 Blockchain Master Degree</p>
                 <br>
@@ -93,10 +95,11 @@
                 <br>
                 <p>Liceo G. Aselli | Cremona, September 2009 – July 2016<br>
                 Diploma Liceo Scientifico Matematico | 62/100</p>
+                </div>
             </section>
-            <br>
             <section>
                 <h2>Volunteering</h2>
+                <div class="curriculum-section-content">
                 <p>Agropolis Onlus<br>
                 Community for Special Needs | Cremona, Italy</p>
                 <p>Member of the board of directions of the Amici di Agropolis Association | 2020 – Present</p>
@@ -104,35 +107,36 @@
                 <p>Staff Management - Public Relations - Event Co-ordinator - Cook | 2017 – Present</p>
                 <p>Staff Management - Public Relations - Cook | 2013 – 2016</p>
                 <p>Waiter | 2011 – 2012</p>
+                </div>
             </section>
-            <br>
             <section>
                 <h2>Languages and Skills</h2>
-                <br>
+                <div class="curriculum-section-content">
                 <p>Languages: Italian [Native], English [B2 Level FCE]</p>
                 <p>Technical Skills: Mac OS and Windows user, Skills for Microsoft Office Package [Good]</p>
                 <p>Programming languages: Python, HTML, CSS, JavaScript, Solidity</p>
+                </div>
             </section>
-            <br>
             <section>
                 <h2>Soft Skills and Interests</h2>
-                <br>
+                <div class="curriculum-section-content">
                 <p>Competencies: Creative, Goal oriented, Resilient, Empathetic, Critical thinker, and Team Player</p>
                 <br>
                 <p>Excellent Competencies in Relationship, Management certified by ITARD</p>
                 <br>
                 <p>Hobbies and Interests: Economy, Finance, Technology, Marketing, Sustainability, Environment, Politics, Travel, Music, Sports oriented, Trekking, Philosophy</p>
-                <br>
+                </div>
             </section>
         </div>   
     </div>
     <div class="sticky-menu">
-        <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="menu-toggle-label"></label>
-        <ul class="menu-items">
-            <li><a href="index.html"><i class="bi bi-house"></i></a></li>
-            <li><a href="form.html"><i class="bi bi-envelope"></i></a></li>
-            <li><a href="curriculum.html"><i class="bi bi-file-earmark-person-fill"></i></a></li>
+        <button type="button" class="menu-toggle-label liquid-glass" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sticky-navigation">
+            <span class="menu-glyph" aria-hidden="true"></span>
+        </button>
+        <ul class="menu-items" id="sticky-navigation">
+            <li><a class="liquid-glass" href="index.html" aria-label="Home"><i class="bi bi-house nav-icon" data-lucide="house" aria-hidden="true"></i></a></li>
+            <li><a class="liquid-glass" href="form.html" aria-label="Contact me"><i class="bi bi-chat nav-icon" data-lucide="message-circle" aria-hidden="true"></i></a></li>
+            <li><a class="liquid-glass" href="curriculum.html" aria-label="Curriculum" aria-current="page"><i class="bi bi-file-earmark-person nav-icon" data-lucide="file-user" aria-hidden="true"></i></a></li>
         </ul>
     </div>
     <nav class="bottom-bar">
@@ -159,5 +163,7 @@
             </a>
         </div>
     </nav>
+    <script src="https://unpkg.com/lucide@1.27.0/dist/umd/lucide.min.js" defer></script>
+    <script src="liquid-glass.js" defer></script>
 </body>
 </html>
