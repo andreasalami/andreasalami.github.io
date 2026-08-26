@@ -309,21 +309,12 @@ h2 {
       aspect-ratio: 1 / 1;
       object-fit: cover;
       box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s ease;    
-      &:hover {
-        transform: scale(1.2);
-      }
     }
   }
 
   .bio-text {
     @include text-style;
     max-height: 100%;
-    transition: transform 0.2s ease;
-
-     &:hover {
-    transform: scale(1.05);
-  }
   }
 
   .empty-space {
@@ -346,11 +337,6 @@ h2 {
 .coding-text {
     @include text-style();
     max-height: 100%;
-    transition: transform 0.2s ease;
-
-     &:hover {
-      transform: scale(1.05);
-    }
 }
 
 
@@ -360,11 +346,6 @@ h2 {
     padding-top: 0px;
     padding-bottom: 30px;
     padding-left: 10px;
-    transition: transform 0.2s ease;
-
-     &:hover {
-      transform: scale(1.05);
-    }
 
 }
 
@@ -382,27 +363,12 @@ h2 {
 .volontar {
   background-color: $third-color;
   min-height: 380px;
-
-  .volontar-text {
-    transition: transform 0.2s ease;
-
-     &:hover {
-      transform: scale(1.05);
-    }
-  }
 }
 
 .hobbies {
   background-color: $fourth-color;
   color: $primary-color;
   min-height: 380px;
-  .hobbies-text {
-    transition: transform 0.2s ease;
-
-     &:hover {
-      transform: scale(1.05);
-    }
-  }
 }
 
 
@@ -600,5 +566,87 @@ section p {
   .submit {
     width: 100px;
     margin-right: 100px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .home-page {
+    .bio,
+    .coding,
+    .volontar,
+    .hobbies {
+      width: 100%;
+      min-height: auto;
+      padding-right: 20px;
+      padding-left: 20px;
+
+      > .row {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      .empty-space {
+        display: none;
+      }
+    }
+
+    .bio {
+      padding-top: 90px;
+
+      .profile-image {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        min-height: 0;
+        padding: 0 0 24px;
+        justify-content: flex-end;
+
+        img {
+          width: 96px;
+          min-width: 96px;
+          min-height: 96px;
+        }
+      }
+    }
+
+    .bio-text,
+    .coding-text,
+    .volontar-text,
+    .hobbies-text {
+      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    .coding {
+      padding-top: 28px;
+    }
+
+    .skills {
+      width: 100%;
+      padding: 12px 0 0;
+      text-align: right;
+
+      > h2 {
+        margin-bottom: 12px;
+      }
+
+      > br {
+        display: none;
+      }
+
+      > h4 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: flex-end;
+
+        br {
+          display: none;
+        }
+      }
+    }
   }
 }

@@ -301,10 +301,6 @@ h2 {
   -o-object-fit: cover;
      object-fit: cover;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
-}
-.bio .profile-image img:hover {
-  transform: scale(1.2);
 }
 .bio .bio-text {
   font-family: "Roboto", sans-serif;
@@ -313,10 +309,6 @@ h2 {
   text-align: left;
   color: rgb(56, 60, 65);
   max-height: 100%;
-  transition: transform 0.2s ease;
-}
-.bio .bio-text:hover {
-  transform: scale(1.05);
 }
 .bio .empty-space {
   background-color: rgb(245, 237, 237);
@@ -346,10 +338,6 @@ h2 {
   text-align: left;
   color: rgb(56, 60, 65);
   max-height: 100%;
-  transition: transform 0.2s ease;
-}
-.coding-text:hover {
-  transform: scale(1.05);
 }
 
 .skills {
@@ -359,10 +347,6 @@ h2 {
   padding-top: 0px;
   padding-bottom: 30px;
   padding-left: 10px;
-  transition: transform 0.2s ease;
-}
-.skills:hover {
-  transform: scale(1.05);
 }
 
 .volontar, .hobbies {
@@ -384,23 +368,11 @@ h2 {
   background-color: rgb(245, 237, 237);
   min-height: 380px;
 }
-.volontar .volontar-text {
-  transition: transform 0.2s ease;
-}
-.volontar .volontar-text:hover {
-  transform: scale(1.05);
-}
 
 .hobbies {
   background-color: rgb(56, 60, 65);
   color: rgb(226, 218, 214);
   min-height: 380px;
-}
-.hobbies .hobbies-text {
-  transition: transform 0.2s ease;
-}
-.hobbies .hobbies-text:hover {
-  transform: scale(1.05);
 }
 
 /* From here specific css curriculum */
@@ -612,5 +584,78 @@ section p {
   .submit {
     width: 100px;
     margin-right: 100px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .home-page .bio,
+  .home-page .coding,
+  .home-page .volontar,
+  .home-page .hobbies {
+    width: 100%;
+    min-height: auto;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .home-page .bio > .row,
+  .home-page .coding > .row,
+  .home-page .volontar > .row,
+  .home-page .hobbies > .row {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .home-page .bio .empty-space,
+  .home-page .coding .empty-space,
+  .home-page .volontar .empty-space,
+  .home-page .hobbies .empty-space {
+    display: none;
+  }
+  .home-page .bio {
+    padding-top: 90px;
+  }
+  .home-page .bio .profile-image {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    min-height: 0;
+    padding: 0 0 24px;
+    justify-content: flex-end;
+  }
+  .home-page .bio .profile-image img {
+    width: 96px;
+    min-width: 96px;
+    min-height: 96px;
+  }
+  .home-page .bio-text,
+  .home-page .coding-text,
+  .home-page .volontar-text,
+  .home-page .hobbies-text {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: left;
+  }
+  .home-page .coding {
+    padding-top: 28px;
+  }
+  .home-page .skills {
+    width: 100%;
+    padding: 12px 0 0;
+    text-align: right;
+  }
+  .home-page .skills > h2 {
+    margin-bottom: 12px;
+  }
+  .home-page .skills > br {
+    display: none;
+  }
+  .home-page .skills > h4 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-end;
+  }
+  .home-page .skills > h4 br {
+    display: none;
   }
 }/*# sourceMappingURL=styles.css.map */
