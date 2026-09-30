@@ -40,40 +40,47 @@
         </div>
     </nav>
     <div class="background">
-        <div class="form-box">
-            <form id="contact-form" class="compile-box" autocomplete="on">
+        <div class="sheet">
+            <header>
                 <p class="form-kicker">Contact</p>
                 <h1>Stay in touch.</h1>
                 <p class="form-intro">If you have any questions or would like more information, fill out the form and I’ll get back to you as soon as possible.</p>
-                <div class="form-grid">
-                    <div class="compile">
-                        <label for="full-name">Name</label>
-                        <input id="full-name" name="user_name" type="text" placeholder="Your name" autocomplete="name" required/>
+            </header>
+            <section>
+                <h2>Send a message</h2>
+                <form id="contact-form" autocomplete="on">
+                    <div class="field-grid">
+                        <div class="field">
+                            <label for="full-name">Name</label>
+                            <input id="full-name" name="user_name" type="text" placeholder="Your name" autocomplete="name" required>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input id="email" name="user_email" type="email" placeholder="you@example.com" autocomplete="email" required>
+                        </div>
+                        <div class="field field-wide">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell me what you have in mind…" rows="6" required></textarea>
+                        </div>
                     </div>
-                    <div class="compile">
-                        <label for="email">Email</label>
-                        <input id="email" name="user_email" type="email" placeholder="you@example.com" autocomplete="email" required/>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-button" data-state="idle">
+                            <span class="submit-label">Send message</span>
+                            <span class="submit-chip" aria-hidden="true">
+                                <i class="bi bi-send icon-send" data-lucide="send"></i>
+                                <i class="bi bi-check-lg icon-check" data-lucide="check"></i>
+                            </span>
+                        </button>
+                        <p id="response-message" role="status" aria-live="polite"></p>
                     </div>
-                    <div class="compile compile-message">
-                        <label for="abstract">Message</label>
-                        <textarea id="abstract" name="message" placeholder="Tell me what you have in mind…" rows="6" required></textarea>
-                    </div>
-                </div> 
-                <!--<div>    
-                    <input type="checkbox" id="privacy-consent" required>
-                    <label for="privacy-consent">I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a>.</label>
-                </div>-->
-                <div class="form-actions">
-                    <button type="submit" class="submit">
-                        <span>Send message</span>
-                        <i class="bi bi-send nav-icon" data-lucide="send" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <p id="response-message" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+            <section>
+                <h2>Privacy</h2>
                 <p class="form-privacy">
-                    Privacy: your name, email and message are sent through <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank" rel="noopener">EmailJS</a> to my inbox and are used only to reply to you. I don't share them with anyone, and you can ask me to delete them at any time by replying to my email.
+                    Your name, email and message are sent through <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank" rel="noopener">EmailJS</a> to my inbox and are used only to reply to you. I don't share them with anyone, and you can ask me to delete them at any time by replying to my email.
                 </p>
-            </form>
+            </section>
         </div>
     </div>
     <div class="sticky-menu">
@@ -113,17 +120,39 @@
     <script src="https://unpkg.com/lucide@1.27.0/dist/umd/lucide.min.js" defer></script>
     <script src="liquid-glass.js" defer></script>
     <script>
-        (function() {
-            emailjs.init("DAJUVCkBosM0mjVOD"); 
+        (() => {
+            emailjs.init("DAJUVCkBosM0mjVOD");
 
-            document.getElementById("contact-form").addEventListener("submit", function(event) {
+            const form = document.getElementById("contact-form");
+            const button = form.querySelector(".submit-button");
+            const label = button.querySelector(".submit-label");
+            const status = document.getElementById("response-message");
+            let resetTimer;
+
+            const setState = (state, text) => {
+                button.dataset.state = state;
+                button.disabled = state === "sending";
+                button.setAttribute("aria-busy", String(state === "sending"));
+                label.textContent = text;
+            };
+
+            form.addEventListener("submit", (event) => {
                 event.preventDefault();
-                emailjs.sendForm("salami.andreaa@gmail.com", "contact_form", this)
+                window.clearTimeout(resetTimer);
+                setState("sending", "Sending…");
+                status.textContent = "";
+                delete status.dataset.tone;
+
+                emailjs.sendForm("salami.andreaa@gmail.com", "contact_form", form)
                     .then(() => {
-                        document.getElementById("response-message").innerText = "Message sent successfully!";
-                        this.reset();
-                    }, (err) => {
-                        document.getElementById("response-message").innerText = "Error sending message.";
+                        setState("sent", "Message sent");
+                        status.textContent = "Thanks! I’ll get back to you soon.";
+                        form.reset();
+                        resetTimer = window.setTimeout(() => setState("idle", "Send message"), 4000);
+                    }, () => {
+                        setState("idle", "Send message");
+                        status.dataset.tone = "error";
+                        status.textContent = "Something went wrong. Please try again in a moment.";
                     });
             });
         })();
