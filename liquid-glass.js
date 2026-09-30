@@ -2,6 +2,7 @@
   "use strict";
 
   const stickyMenu = document.querySelector(".sticky-menu");
+  const topBar = document.querySelector(".top-bar");
   const menuToggle = document.querySelector(".menu-toggle-label");
   const menuLinks = document.querySelectorAll(".menu-items a");
   const glassSurfaces = document.querySelectorAll(".liquid-glass");
@@ -9,6 +10,31 @@
 
   if (window.lucide) {
     window.lucide.createIcons();
+  }
+
+  // Gooey filter: blur + alpha threshold fuses nearby blobs into liquid necks.
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    '<svg class="goo-defs" aria-hidden="true" focusable="false"><filter id="goo">' +
+      '<feGaussianBlur in="SourceGraphic" stdDeviation="6"/>' +
+      '<feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/>' +
+      "</filter></svg>"
+  );
+  const gooLayer = (className, blobs) =>
+    `<span class="${className}" aria-hidden="true">${"<i></i>".repeat(blobs)}</span>`;
+
+  if (topBar) {
+    topBar.insertAdjacentHTML("beforeend", gooLayer("bar-goo", 3));
+    // Enables the re-absorb flash only after a first split, never on page load.
+    const markOpened = () => topBar.classList.add("has-opened");
+    topBar.querySelectorAll(".cv, .contact").forEach((action) => {
+      action.addEventListener("pointerenter", markOpened, { once: true });
+      action.addEventListener("focusin", markOpened, { once: true });
+    });
+  }
+
+  if (stickyMenu) {
+    stickyMenu.insertAdjacentHTML("beforeend", gooLayer("menu-goo", 4));
   }
 
   if (!stickyMenu || !menuToggle) {
@@ -28,7 +54,7 @@
       });
       closeTimer = window.setTimeout(() => {
         stickyMenu.classList.remove("is-closing");
-      }, 440);
+      }, 520);
     }
 
     menuToggle.setAttribute("aria-expanded", String(isOpen));
