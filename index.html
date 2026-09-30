@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300..800;1,300..400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
     <meta property="og:type" content="profile">
@@ -22,7 +22,7 @@
     <meta property="og:title" content="Andrea Salami – Developer in Cremona, Italy">
     <meta property="og:description" content="Hi! Welcome to my personal website. I'm Andrea Salami, based in Cremona, Italy. I'm a developer with a passion for technology, innovation, and social impact.">
     <meta property="og:url" content="https://andreasalami.github.io/">
-    <meta property="og:image" content="https://andreasalami.github.io/images/profile.jpg">
+    <meta property="og:image" content="https://andreasalami.github.io/images/andrea-salami.jpg">
     <meta property="profile:first_name" content="Andrea">
     <meta property="profile:last_name" content="Salami">
     <meta name="twitter:card" content="summary">
@@ -30,17 +30,40 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Andrea Salami",
-        "url": "https://andreasalami.github.io/",
-        "image": "https://andreasalami.github.io/images/profile.jpg",
-        "jobTitle": "Developer",
-        "address": { "@type": "PostalAddress", "addressLocality": "Cremona", "addressCountry": "IT" },
-        "memberOf": { "@type": "Organization", "name": "Amici di Agropolis" },
-        "sameAs": [
-            "https://www.linkedin.com/in/andrea-salami-204908209/",
-            "https://github.com/andreasalami",
-            "https://x.com/salami_andrea"
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://andreasalami.github.io/#website",
+                "name": "Andrea Salami",
+                "url": "https://andreasalami.github.io/"
+            },
+            {
+                "@type": "ProfilePage",
+                "@id": "https://andreasalami.github.io/#profilepage",
+                "url": "https://andreasalami.github.io/",
+                "name": "Andrea Salami – Developer in Cremona, Italy",
+                "isPartOf": { "@id": "https://andreasalami.github.io/#website" },
+                "mainEntity": { "@id": "https://andreasalami.github.io/#person" }
+            },
+            {
+                "@type": "Person",
+                "@id": "https://andreasalami.github.io/#person",
+                "name": "Andrea Salami",
+                "givenName": "Andrea",
+                "familyName": "Salami",
+                "url": "https://andreasalami.github.io/",
+                "image": "https://andreasalami.github.io/images/andrea-salami.jpg",
+                "jobTitle": "Developer",
+                "description": "Developer based in Cremona, Italy, studying for a Master's Degree in Blockchain at Start2Impact University and vice president of the Amici di Agropolis association.",
+                "address": { "@type": "PostalAddress", "addressLocality": "Cremona", "addressCountry": "IT" },
+                "memberOf": { "@type": "Organization", "name": "Amici di Agropolis" },
+                "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "TypeScript", "Python", "Solidity", "Blockchain"],
+                "sameAs": [
+                    "https://www.linkedin.com/in/andrea-salami-204908209/",
+                    "https://github.com/andreasalami",
+                    "https://x.com/salami_andrea"
+                ]
+            }
         ]
     }
     </script>
@@ -61,7 +84,7 @@
         <div class="bio">
             <div class="row">
                 <div class="col-3 profile-image">
-                  <img src="images/profile.jpg" alt="Andrea Salami" width="480" height="390" class="img-fluid">
+                  <img src="images/andrea-salami.jpg" alt="Andrea Salami" width="480" height="390" class="img-fluid">
                 </div>
                 <div class="col-6 bio-text">
                     <h1 class="bio-name">Andrea Salami</h1>
@@ -70,7 +93,7 @@
                     </h2>
                     <br>
                     <p>
-                        I'm Andrea, based in Cremona, Italy, and I am a developer with a passion for technology, innovation, and community engagement. As vice president of the Amici di Agropolis association, I actively contribute to initiatives that promote social inclusion and community development.
+                        I'm Andrea Salami, based in Cremona, Italy, and I am a developer with a passion for technology, innovation, and community engagement. As vice president of the Amici di Agropolis association, I actively contribute to initiatives that promote social inclusion and community development.
                     </p>                                 
                     <p>
                         Travelling fuels my curiosity, I love exploring new cultures and landscapes, whether solo or with good company. Sports have always been a key part of my life; I’ve played football competitively and enjoy running, cycling, skiing, and trekking.
@@ -241,7 +264,7 @@
         <br>
         <div class="social-links">
             <a href="https://x.com/salami_andrea" target="_blank" rel="me noopener">
-                <i class="fab fa-twitter"></i> X
+                <i class="fab fa-x-twitter"></i> X
             </a>
         </div>
         <div class="social-links">
