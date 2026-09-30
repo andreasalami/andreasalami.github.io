@@ -25,12 +25,6 @@
 
   if (topBar) {
     topBar.insertAdjacentHTML("beforeend", gooLayer("bar-goo", 3));
-    // Enables the re-absorb flash only after a first split, never on page load.
-    const markOpened = () => topBar.classList.add("has-opened");
-    topBar.querySelectorAll(".cv, .contact").forEach((action) => {
-      action.addEventListener("pointerenter", markOpened, { once: true });
-      action.addEventListener("focusin", markOpened, { once: true });
-    });
   }
 
   if (stickyMenu) {
