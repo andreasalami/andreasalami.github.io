@@ -67,7 +67,7 @@
 }
 
 /* One curve under several names: switching state restarts the flash. */
-@each $name in goo-flash, goo-flash-last, goo-flash-out {
+@each $name in goo-flash, goo-flash-cv, goo-flash-all {
   @keyframes #{$name} {
     0% { opacity: 0; }
     12% { opacity: 0.36; }
@@ -79,10 +79,10 @@
 /* Navbar: the nav is only a layout box, ::before is the glass pill so it can retract. */
 .home-page .top-bar {
   /* Derived here, not on :root, so the mobile --action-size override reaches them. */
-  /* Space the pill gives up when the actions detach: the drops plus the split. */
+  /* Space the pill leaves free at rest: both drops plus the split. */
   --bar-cut: calc(var(--bar-pad) + 2 * var(--action-size) + var(--action-gap) + var(--bar-split));
   --bar-cut-last: calc(var(--bar-pad) + var(--action-size) + var(--bar-split));
-  /* When only the last drop leaves, the CV icon slides left to stay inside the pill. */
+  /* When the pill swallows only CV, its icon slides left to sit inside the shorter pill. */
   --cv-shift: calc(var(--bar-split) + var(--bar-pad) - var(--action-gap));
   top: 0;
   z-index: 1500;
@@ -175,9 +175,32 @@
   object-fit: contain;
 }
 
-/* Integrated when idle: hovering an action detaches it (and any action after it) as a drop. */
+@mixin drop-glass {
+  border-color: rgba(255, 255, 255, 0.34);
+  background:
+    radial-gradient(circle at 32% 22%, rgba(255, 255, 255, 0.40), transparent 50%),
+    var(--glass-surface-hover);
+  box-shadow:
+    0 9px 24px rgba(29, 42, 48, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+}
+
+@mixin absorbed {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: none;
+}
+
+/* At rest the actions float beside a shorter pill as drops (they split off on page load);
+   hovering one lets the pill swallow it and every action before it. */
 .home-page .top-bar .cv,
 .home-page .top-bar .contact {
+  @include drop-glass;
   position: relative;
   display: flex;
   align-items: center;
@@ -188,24 +211,38 @@
   min-width: var(--action-size);
   margin: 0;
   padding: 0;
-  border: 1px solid transparent;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 50%;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   transition:
-    transform 600ms var(--glass-spring) 90ms,
     border-color 260ms ease 90ms,
     background 300ms ease 90ms,
     box-shadow 300ms ease 90ms;
+}
+
+.home-page .top-bar {
+  --pill-cut: var(--bar-cut);
+}
+
+.home-page .top-bar .cv,
+.home-page .bar-goo i:nth-child(2) {
+  animation: drop-pinch 600ms var(--glass-spring) backwards;
+}
+
+.home-page .top-bar .contact,
+.home-page .bar-goo i:nth-child(3) {
+  animation: drop-pinch 600ms var(--glass-spring) 50ms backwards;
+}
+
+.home-page .bar-goo {
+  animation: goo-flash 600ms ease-out both;
 }
 
 .home-page .top-bar .cv {
   margin-left: auto;
 }
 
-/* Bridges the gap to the contact drop, so moving between them never passes through "idle". */
+/* Bridges the gap to the contact drop, so moving between them never passes through rest. */
 .home-page .top-bar .cv::after {
   content: "";
   position: absolute;
@@ -223,75 +260,61 @@
   width: 100%;
   height: 100%;
   color: var(--glass-ink) !important;
+  transition: transform 600ms var(--glass-spring) 90ms;
 }
 
-@mixin drop-glass {
-  border-color: rgba(255, 255, 255, 0.34);
-  background:
-    radial-gradient(circle at 32% 22%, rgba(255, 255, 255, 0.40), transparent 50%),
-    var(--glass-surface-hover);
-  box-shadow:
-    0 9px 24px rgba(29, 42, 48, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(18px) saturate(165%);
-  -webkit-backdrop-filter: blur(18px) saturate(165%);
-}
-
-@mixin bar-opening {
+/* Moving toward a hovered state reacts at once; returning to rest waits 90ms. */
+@mixin bar-active {
   &::before,
   .cv,
   .contact,
+  .cv a,
   .bar-goo i {
     transition-delay: 0ms;
   }
 }
 
-/* CV hovered: the pill retracts past both actions. */
-@mixin split-both {
-  @include bar-opening;
-  --pill-cut: var(--bar-cut);
-
-  .cv,
-  .contact {
-    @include drop-glass;
-  }
-
-  .cv,
-  .bar-goo i:nth-child(2) {
-    animation: drop-pinch 600ms var(--glass-spring) backwards;
-  }
-
-  .contact,
-  .bar-goo i:nth-child(3) {
-    animation: drop-pinch 600ms var(--glass-spring) 50ms backwards;
-  }
-
-  .bar-goo {
-    animation: goo-flash 600ms ease-out both;
-  }
-}
-
-/* Contact hovered: only the last drop leaves, CV stays inside the pill. */
-@mixin split-last {
-  @include bar-opening;
+/* CV hovered: the pill swallows CV, the contact drop stays apart. */
+@mixin absorb-cv {
+  @include bar-active;
   --pill-cut: var(--bar-cut-last);
 
-  .contact {
-    @include drop-glass;
+  .cv {
+    @include absorbed;
   }
 
-  .cv,
+  .bar-goo i:nth-child(2) {
+    animation: none;
+  }
+
+  /* Only the icon moves, so the hover target under the pointer stays put. */
+  .cv a,
   .bar-goo i:nth-child(2) {
     transform: translateX(calc(-1 * var(--cv-shift)));
   }
 
-  .contact,
+  .bar-goo {
+    animation: goo-flash-cv 600ms ease-out both;
+  }
+}
+
+/* Contact hovered: the pill is whole again and swallows both actions. */
+@mixin absorb-all {
+  @include bar-active;
+  --pill-cut: 0px;
+
+  .cv,
+  .contact {
+    @include absorbed;
+  }
+
+  .bar-goo i:nth-child(2),
   .bar-goo i:nth-child(3) {
-    animation: drop-pinch 600ms var(--glass-spring) backwards;
+    animation: none;
   }
 
   .bar-goo {
-    animation: goo-flash-last 600ms ease-out both;
+    animation: goo-flash-all 600ms ease-out both;
   }
 }
 
@@ -301,30 +324,20 @@
   }
 
   .home-page .top-bar:has(.cv:hover) {
-    @include split-both;
+    @include absorb-cv;
   }
 
   .home-page .top-bar:has(.contact:hover) {
-    @include split-last;
-  }
-
-  .home-page .top-bar .cv:hover,
-  .home-page .top-bar .contact:hover {
-    transform: translateY(-2px) scale(1.06);
+    @include absorb-all;
   }
 }
 
 .home-page .top-bar:has(.cv:focus-within) {
-  @include split-both;
+  @include absorb-cv;
 }
 
 .home-page .top-bar:has(.contact:focus-within) {
-  @include split-last;
-}
-
-/* Re-absorb flash, only after a first split so it never plays on page load. */
-.home-page .top-bar.has-opened:not(:has(.cv:hover, .contact:hover, .cv:focus-within, .contact:focus-within)) .bar-goo {
-  animation: goo-flash-out 600ms ease-out both;
+  @include absorb-all;
 }
 
 @keyframes drop-pinch {

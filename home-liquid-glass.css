@@ -67,7 +67,7 @@
     opacity: 0;
   }
 }
-@keyframes goo-flash-last {
+@keyframes goo-flash-cv {
   0% {
     opacity: 0;
   }
@@ -81,7 +81,7 @@
     opacity: 0;
   }
 }
-@keyframes goo-flash-out {
+@keyframes goo-flash-all {
   0% {
     opacity: 0;
   }
@@ -98,10 +98,10 @@
 /* Navbar: the nav is only a layout box, ::before is the glass pill so it can retract. */
 .home-page .top-bar {
   /* Derived here, not on :root, so the mobile --action-size override reaches them. */
-  /* Space the pill gives up when the actions detach: the drops plus the split. */
+  /* Space the pill leaves free at rest: both drops plus the split. */
   --bar-cut: calc(var(--bar-pad) + 2 * var(--action-size) + var(--action-gap) + var(--bar-split));
   --bar-cut-last: calc(var(--bar-pad) + var(--action-size) + var(--bar-split));
-  /* When only the last drop leaves, the CV icon slides left to stay inside the pill. */
+  /* When the pill swallows only CV, its icon slides left to sit inside the shorter pill. */
   --cv-shift: calc(var(--bar-split) + var(--bar-pad) - var(--action-gap));
   top: 0;
   z-index: 1500;
@@ -200,9 +200,15 @@
   object-fit: contain;
 }
 
-/* Integrated when idle: hovering an action detaches it (and any action after it) as a drop. */
+/* At rest the actions float beside a shorter pill as drops (they split off on page load);
+   hovering one lets the pill swallow it and every action before it. */
 .home-page .top-bar .cv,
 .home-page .top-bar .contact {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: radial-gradient(circle at 32% 22%, rgba(255, 255, 255, 0.4), transparent 50%), var(--glass-surface-hover);
+  box-shadow: 0 9px 24px rgba(29, 42, 48, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
   position: relative;
   display: flex;
   align-items: center;
@@ -213,20 +219,35 @@
   min-width: var(--action-size);
   margin: 0;
   padding: 0;
-  border: 1px solid transparent;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 50%;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  transition: transform 600ms var(--glass-spring) 90ms, border-color 260ms ease 90ms, background 300ms ease 90ms, box-shadow 300ms ease 90ms;
+  transition: border-color 260ms ease 90ms, background 300ms ease 90ms, box-shadow 300ms ease 90ms;
+}
+
+.home-page .top-bar {
+  --pill-cut: var(--bar-cut);
+}
+
+.home-page .top-bar .cv,
+.home-page .bar-goo i:nth-child(2) {
+  animation: drop-pinch 600ms var(--glass-spring) backwards;
+}
+
+.home-page .top-bar .contact,
+.home-page .bar-goo i:nth-child(3) {
+  animation: drop-pinch 600ms var(--glass-spring) 50ms backwards;
+}
+
+.home-page .bar-goo {
+  animation: goo-flash 600ms ease-out both;
 }
 
 .home-page .top-bar .cv {
   margin-left: auto;
 }
 
-/* Bridges the gap to the contact drop, so moving between them never passes through "idle". */
+/* Bridges the gap to the contact drop, so moving between them never passes through rest. */
 .home-page .top-bar .cv::after {
   content: "";
   position: absolute;
@@ -244,137 +265,129 @@
   width: 100%;
   height: 100%;
   color: var(--glass-ink) !important;
+  transition: transform 600ms var(--glass-spring) 90ms;
 }
 
-/* CV hovered: the pill retracts past both actions. */
-/* Contact hovered: only the last drop leaves, CV stays inside the pill. */
+/* Moving toward a hovered state reacts at once; returning to rest waits 90ms. */
+/* CV hovered: the pill swallows CV, the contact drop stays apart. */
+/* Contact hovered: the pill is whole again and swallows both actions. */
 @media (hover: hover) {
   .home-page .top-bar:hover {
     transform: translateY(-1px);
   }
 
   .home-page .top-bar:has(.cv:hover) {
-    --pill-cut: var(--bar-cut);
+    --pill-cut: var(--bar-cut-last);
+    /* Only the icon moves, so the hover target under the pointer stays put. */
   }
   .home-page .top-bar:has(.cv:hover)::before,
   .home-page .top-bar:has(.cv:hover) .cv,
   .home-page .top-bar:has(.cv:hover) .contact,
+  .home-page .top-bar:has(.cv:hover) .cv a,
   .home-page .top-bar:has(.cv:hover) .bar-goo i {
     transition-delay: 0ms;
   }
-  .home-page .top-bar:has(.cv:hover) .cv,
-  .home-page .top-bar:has(.cv:hover) .contact {
-    border-color: rgba(255, 255, 255, 0.34);
-    background: radial-gradient(circle at 32% 22%, rgba(255, 255, 255, 0.4), transparent 50%), var(--glass-surface-hover);
-    box-shadow: 0 9px 24px rgba(29, 42, 48, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(18px) saturate(165%);
-    -webkit-backdrop-filter: blur(18px) saturate(165%);
+  .home-page .top-bar:has(.cv:hover) .cv {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: none;
   }
-  .home-page .top-bar:has(.cv:hover) .cv,
   .home-page .top-bar:has(.cv:hover) .bar-goo i:nth-child(2) {
-    animation: drop-pinch 600ms var(--glass-spring) backwards;
+    animation: none;
   }
-  .home-page .top-bar:has(.cv:hover) .contact,
-  .home-page .top-bar:has(.cv:hover) .bar-goo i:nth-child(3) {
-    animation: drop-pinch 600ms var(--glass-spring) 50ms backwards;
+  .home-page .top-bar:has(.cv:hover) .cv a,
+  .home-page .top-bar:has(.cv:hover) .bar-goo i:nth-child(2) {
+    transform: translateX(calc(-1 * var(--cv-shift)));
   }
   .home-page .top-bar:has(.cv:hover) .bar-goo {
-    animation: goo-flash 600ms ease-out both;
+    animation: goo-flash-cv 600ms ease-out both;
   }
 
   .home-page .top-bar:has(.contact:hover) {
-    --pill-cut: var(--bar-cut-last);
+    --pill-cut: 0px;
   }
   .home-page .top-bar:has(.contact:hover)::before,
   .home-page .top-bar:has(.contact:hover) .cv,
   .home-page .top-bar:has(.contact:hover) .contact,
+  .home-page .top-bar:has(.contact:hover) .cv a,
   .home-page .top-bar:has(.contact:hover) .bar-goo i {
     transition-delay: 0ms;
   }
-  .home-page .top-bar:has(.contact:hover) .contact {
-    border-color: rgba(255, 255, 255, 0.34);
-    background: radial-gradient(circle at 32% 22%, rgba(255, 255, 255, 0.4), transparent 50%), var(--glass-surface-hover);
-    box-shadow: 0 9px 24px rgba(29, 42, 48, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(18px) saturate(165%);
-    -webkit-backdrop-filter: blur(18px) saturate(165%);
-  }
   .home-page .top-bar:has(.contact:hover) .cv,
-  .home-page .top-bar:has(.contact:hover) .bar-goo i:nth-child(2) {
-    transform: translateX(calc(-1 * var(--cv-shift)));
+  .home-page .top-bar:has(.contact:hover) .contact {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: none;
   }
-  .home-page .top-bar:has(.contact:hover) .contact,
+  .home-page .top-bar:has(.contact:hover) .bar-goo i:nth-child(2),
   .home-page .top-bar:has(.contact:hover) .bar-goo i:nth-child(3) {
-    animation: drop-pinch 600ms var(--glass-spring) backwards;
+    animation: none;
   }
   .home-page .top-bar:has(.contact:hover) .bar-goo {
-    animation: goo-flash-last 600ms ease-out both;
-  }
-
-  .home-page .top-bar .cv:hover,
-  .home-page .top-bar .contact:hover {
-    transform: translateY(-2px) scale(1.06);
+    animation: goo-flash-all 600ms ease-out both;
   }
 }
 .home-page .top-bar:has(.cv:focus-within) {
-  --pill-cut: var(--bar-cut);
+  --pill-cut: var(--bar-cut-last);
+  /* Only the icon moves, so the hover target under the pointer stays put. */
 }
 .home-page .top-bar:has(.cv:focus-within)::before,
 .home-page .top-bar:has(.cv:focus-within) .cv,
 .home-page .top-bar:has(.cv:focus-within) .contact,
+.home-page .top-bar:has(.cv:focus-within) .cv a,
 .home-page .top-bar:has(.cv:focus-within) .bar-goo i {
   transition-delay: 0ms;
 }
-.home-page .top-bar:has(.cv:focus-within) .cv,
-.home-page .top-bar:has(.cv:focus-within) .contact {
-  border-color: rgba(255, 255, 255, 0.34);
-  background: radial-gradient(circle at 32% 22%, rgba(255, 255, 255, 0.4), transparent 50%), var(--glass-surface-hover);
-  box-shadow: 0 9px 24px rgba(29, 42, 48, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(18px) saturate(165%);
-  -webkit-backdrop-filter: blur(18px) saturate(165%);
+.home-page .top-bar:has(.cv:focus-within) .cv {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: none;
 }
-.home-page .top-bar:has(.cv:focus-within) .cv,
 .home-page .top-bar:has(.cv:focus-within) .bar-goo i:nth-child(2) {
-  animation: drop-pinch 600ms var(--glass-spring) backwards;
+  animation: none;
 }
-.home-page .top-bar:has(.cv:focus-within) .contact,
-.home-page .top-bar:has(.cv:focus-within) .bar-goo i:nth-child(3) {
-  animation: drop-pinch 600ms var(--glass-spring) 50ms backwards;
+.home-page .top-bar:has(.cv:focus-within) .cv a,
+.home-page .top-bar:has(.cv:focus-within) .bar-goo i:nth-child(2) {
+  transform: translateX(calc(-1 * var(--cv-shift)));
 }
 .home-page .top-bar:has(.cv:focus-within) .bar-goo {
-  animation: goo-flash 600ms ease-out both;
+  animation: goo-flash-cv 600ms ease-out both;
 }
 
 .home-page .top-bar:has(.contact:focus-within) {
-  --pill-cut: var(--bar-cut-last);
+  --pill-cut: 0px;
 }
 .home-page .top-bar:has(.contact:focus-within)::before,
 .home-page .top-bar:has(.contact:focus-within) .cv,
 .home-page .top-bar:has(.contact:focus-within) .contact,
+.home-page .top-bar:has(.contact:focus-within) .cv a,
 .home-page .top-bar:has(.contact:focus-within) .bar-goo i {
   transition-delay: 0ms;
 }
-.home-page .top-bar:has(.contact:focus-within) .contact {
-  border-color: rgba(255, 255, 255, 0.34);
-  background: radial-gradient(circle at 32% 22%, rgba(255, 255, 255, 0.4), transparent 50%), var(--glass-surface-hover);
-  box-shadow: 0 9px 24px rgba(29, 42, 48, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(18px) saturate(165%);
-  -webkit-backdrop-filter: blur(18px) saturate(165%);
-}
 .home-page .top-bar:has(.contact:focus-within) .cv,
-.home-page .top-bar:has(.contact:focus-within) .bar-goo i:nth-child(2) {
-  transform: translateX(calc(-1 * var(--cv-shift)));
+.home-page .top-bar:has(.contact:focus-within) .contact {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: none;
 }
-.home-page .top-bar:has(.contact:focus-within) .contact,
+.home-page .top-bar:has(.contact:focus-within) .bar-goo i:nth-child(2),
 .home-page .top-bar:has(.contact:focus-within) .bar-goo i:nth-child(3) {
-  animation: drop-pinch 600ms var(--glass-spring) backwards;
+  animation: none;
 }
 .home-page .top-bar:has(.contact:focus-within) .bar-goo {
-  animation: goo-flash-last 600ms ease-out both;
-}
-
-/* Re-absorb flash, only after a first split so it never plays on page load. */
-.home-page .top-bar.has-opened:not(:has(.cv:hover, .contact:hover, .cv:focus-within, .contact:focus-within)) .bar-goo {
-  animation: goo-flash-out 600ms ease-out both;
+  animation: goo-flash-all 600ms ease-out both;
 }
 
 @keyframes drop-pinch {
