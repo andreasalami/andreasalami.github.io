@@ -665,8 +665,8 @@ section p {
    ========================================================= */
 :root {
   --glass-ink: rgba(56, 60, 65, 0.94);
-  --glass-surface: rgba(255, 255, 255, 0.04);
-  --glass-surface-hover: rgba(255, 255, 255, 0.10);
+  --glass-surface: rgba(255, 255, 255, 0.02);
+  --glass-surface-hover: rgba(255, 255, 255, 0.07);
   /* Light enough that content underneath shows as shapes, strong enough that it can't be read. */
   --glass-blur: 8px;
   --glass-border: rgba(255, 255, 255, 0.30);
@@ -684,7 +684,7 @@ section p {
 .home-page .liquid-glass {
   --glass-x: 50%;
   --glass-y: 0%;
-  background: radial-gradient(circle at var(--glass-x) var(--glass-y), rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.09) 28%, transparent 58%), linear-gradient(135deg, rgba(255, 255, 255, 0.08), var(--glass-surface));
+  background: radial-gradient(circle at var(--glass-x) var(--glass-y), rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.09) 28%, transparent 58%), linear-gradient(135deg, rgba(255, 255, 255, 0.05), var(--glass-surface));
   border: 1px solid var(--glass-border);
   box-shadow: 0 14px 42px var(--glass-shadow), inset 0 1px 0 var(--glass-highlight), inset 0 -1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(var(--glass-blur)) saturate(175%);
@@ -792,7 +792,7 @@ section p {
 .home-page .top-bar::before {
   --glass-x: 50%;
   --glass-y: 0%;
-  background: radial-gradient(circle at var(--glass-x) var(--glass-y), rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.09) 28%, transparent 58%), linear-gradient(135deg, rgba(255, 255, 255, 0.08), var(--glass-surface));
+  background: radial-gradient(circle at var(--glass-x) var(--glass-y), rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.09) 28%, transparent 58%), linear-gradient(135deg, rgba(255, 255, 255, 0.05), var(--glass-surface));
   border: 1px solid var(--glass-border);
   box-shadow: 0 14px 42px var(--glass-shadow), inset 0 1px 0 var(--glass-highlight), inset 0 -1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(var(--glass-blur)) saturate(175%);
@@ -1166,30 +1166,6 @@ section p {
   }
 }
 
-/* Page changes keep the bar and the menu in place while the content crossfades. */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-}
-
-.home-page .top-bar {
-  view-transition-name: top-bar;
-}
-
-.home-page .sticky-menu {
-  view-transition-name: sticky-menu;
-}
-
-/* No crossfade for the bar: each page plays its own arrival animation instead. */
-::view-transition-old(top-bar) {
-  display: none;
-}
-
-::view-transition-new(top-bar) {
-  animation: none;
-}
-
 @keyframes drop-pinch {
   from {
     transform: translateX(-16px) scale(0.78);
@@ -1241,7 +1217,7 @@ section p {
 
 /* The sticky menu keeps flat glass: no glare along the top edge. */
 .home-page .sticky-menu .liquid-glass {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), var(--glass-surface));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), var(--glass-surface));
   box-shadow: 0 14px 42px var(--glass-shadow), inset 0 -1px 0 rgba(255, 255, 255, 0.08);
 }
 
