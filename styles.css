@@ -1693,18 +1693,97 @@ section p {
   cursor: progress;
 }
 
-.form-page .submit-button[data-state="sending"] .submit-chip > * {
+.form-page .submit-button[data-state="sending"] .submit-chip > :not(.submit-orbit) {
   opacity: 0;
 }
 
-.form-page .submit-button[data-state="sending"] .submit-chip::after {
+/* Sending loader: three dots orbiting, each trailing one smaller and lighter. */
+.form-page .submit-orbit {
+  position: absolute;
+  inset: 9px;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.form-page .submit-orbit span {
+  position: absolute;
+  inset: 0;
+}
+
+.form-page .submit-orbit span::before {
   content: "";
   position: absolute;
-  inset: 10px;
-  border: 2px solid currentColor;
-  border-right-color: transparent;
+  top: 0;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  background: currentColor;
   border-radius: 50%;
-  animation: submit-spin 800ms linear infinite;
+  --dot-scale: 1;
+  transform: scale(var(--dot-scale));
+}
+
+.form-page .submit-orbit span:nth-child(2) {
+  transform: rotate(-120deg);
+}
+
+.form-page .submit-orbit span:nth-child(2)::before {
+  opacity: 0.65;
+  --dot-scale: 0.85;
+  animation-delay: -365ms;
+}
+
+.form-page .submit-orbit span:nth-child(3) {
+  transform: rotate(-240deg);
+}
+
+.form-page .submit-orbit span:nth-child(3)::before {
+  opacity: 0.35;
+  --dot-scale: 0.7;
+  animation-delay: -730ms;
+}
+
+.form-page .submit-button[data-state="sending"] .submit-orbit {
+  opacity: 1;
+  animation:
+    submit-spin 900ms cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite,
+    submit-breathe 450ms ease-in-out infinite alternate;
+}
+
+/* Orbit radius breathes between 12px and 8px (chip is 38px). */
+@keyframes submit-breathe {
+  from {
+    inset: 7px;
+  }
+  to {
+    inset: 11px;
+  }
+}
+
+/* Longhands so each dot keeps its own animation-delay (staggered pulse). */
+.form-page .submit-button[data-state="sending"] .submit-orbit span::before {
+  animation-name: submit-pulse;
+  animation-duration: 1100ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes submit-pulse {
+  50% {
+    transform: scale(calc(var(--dot-scale) * 1.4));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-page .submit-button[data-state="sending"] .submit-orbit {
+    animation-name: submit-spin;
+    animation-duration: 2.4s;
+  }
+
+  .form-page .submit-button[data-state="sending"] .submit-orbit span::before {
+    animation-name: none;
+  }
 }
 
 .form-page .submit-button[data-state="sent"] .icon-send {
