@@ -25,8 +25,24 @@
 
   if (topBar) {
     topBar.insertAdjacentHTML("beforeend", gooLayer("bar-goo", 3));
-    // After the first paint, so the pill visibly absorbs the current page's drop (touch screens).
-    requestAnimationFrame(() => requestAnimationFrame(() => topBar.classList.add("is-arrived")));
+    // Touch screens: the pill starts from the previous page's state (home keeps the logo pop),
+    // then after the first paint it moves to the current page's drop.
+    let fromState;
+    try {
+      const previous = new URL(document.referrer);
+      if (previous.origin === location.origin && !topBar.querySelector('.logo [aria-current="page"]')) {
+        fromState = { "curriculum.html": "from-cv", "form.html": "from-all" }[previous.pathname.split("/").pop()];
+      }
+    } catch {
+      // No referrer (typed URL, bookmark): start from rest.
+    }
+    if (fromState) {
+      topBar.classList.add(fromState);
+    }
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      topBar.classList.remove("from-cv", "from-all");
+      topBar.classList.add("is-arrived");
+    }));
   }
 
   // iOS Safari only applies :active (the touch press effect) when a touch listener exists.

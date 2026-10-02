@@ -1030,6 +1030,15 @@ section p {
     transition-duration: 90ms;
   }
 
+  /* Start state = the previous page's (set by liquid-glass.js), so the pill continues from there. */
+  .home-page .top-bar.from-cv {
+    @include absorb-cv;
+  }
+
+  .home-page .top-bar.from-all {
+    @include absorb-all;
+  }
+
   .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) {
     @include absorb-cv;
   }
@@ -1040,11 +1049,11 @@ section p {
 }
 
 @media (hover: none) {
-  /* Home: the logo marks the arrival, so the drops skip their split-off. */
-  .home-page .top-bar:has(.logo a[aria-current="page"]) .cv,
-  .home-page .top-bar:has(.logo a[aria-current="page"]) .contact,
-  .home-page .top-bar:has(.logo a[aria-current="page"]) .bar-goo,
-  .home-page .top-bar:has(.logo a[aria-current="page"]) .bar-goo i {
+  /* The arrival move replaces the load split-off (it read as the pill going back). */
+  .home-page .top-bar .cv,
+  .home-page .top-bar .contact,
+  .home-page .top-bar .bar-goo,
+  .home-page .top-bar .bar-goo i {
     animation: none;
   }
 

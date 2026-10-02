@@ -1087,6 +1087,64 @@ section p {
     transition-duration: 90ms;
   }
 
+  /* Start state = the previous page's (set by liquid-glass.js), so the pill continues from there. */
+  .home-page .top-bar.from-cv {
+    --pill-cut: var(--bar-cut-last);
+    /* Only the icon moves, so the hover target under the pointer stays put. */
+  }
+  .home-page .top-bar.from-cv::before,
+  .home-page .top-bar.from-cv .cv,
+  .home-page .top-bar.from-cv .contact,
+  .home-page .top-bar.from-cv .cv a,
+  .home-page .top-bar.from-cv .bar-goo i {
+    transition-delay: 0ms;
+  }
+  .home-page .top-bar.from-cv .cv {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: none;
+  }
+  .home-page .top-bar.from-cv .bar-goo i:nth-child(2) {
+    animation: none;
+  }
+  .home-page .top-bar.from-cv .cv a,
+  .home-page .top-bar.from-cv .bar-goo i:nth-child(2) {
+    transform: translateX(calc(-1 * var(--cv-shift)));
+  }
+  .home-page .top-bar.from-cv .bar-goo {
+    animation: goo-flash-cv 600ms ease-out both;
+  }
+
+  .home-page .top-bar.from-all {
+    --pill-cut: 0px;
+  }
+  .home-page .top-bar.from-all::before,
+  .home-page .top-bar.from-all .cv,
+  .home-page .top-bar.from-all .contact,
+  .home-page .top-bar.from-all .cv a,
+  .home-page .top-bar.from-all .bar-goo i {
+    transition-delay: 0ms;
+  }
+  .home-page .top-bar.from-all .cv,
+  .home-page .top-bar.from-all .contact {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: none;
+  }
+  .home-page .top-bar.from-all .bar-goo i:nth-child(2),
+  .home-page .top-bar.from-all .bar-goo i:nth-child(3) {
+    animation: none;
+  }
+  .home-page .top-bar.from-all .bar-goo {
+    animation: goo-flash-all 600ms ease-out both;
+  }
+
   .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) {
     --pill-cut: var(--bar-cut-last);
     /* Only the icon moves, so the hover target under the pointer stays put. */
@@ -1146,11 +1204,11 @@ section p {
 }
 
 @media (hover: none) {
-  /* Home: the logo marks the arrival, so the drops skip their split-off. */
-  .home-page .top-bar:has(.logo a[aria-current="page"]) .cv,
-  .home-page .top-bar:has(.logo a[aria-current="page"]) .contact,
-  .home-page .top-bar:has(.logo a[aria-current="page"]) .bar-goo,
-  .home-page .top-bar:has(.logo a[aria-current="page"]) .bar-goo i {
+  /* The arrival move replaces the load split-off (it read as the pill going back). */
+  .home-page .top-bar .cv,
+  .home-page .top-bar .contact,
+  .home-page .top-bar .bar-goo,
+  .home-page .top-bar .bar-goo i {
     animation: none;
   }
 
