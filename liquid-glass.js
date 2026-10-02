@@ -25,7 +25,12 @@
 
   if (topBar) {
     topBar.insertAdjacentHTML("beforeend", gooLayer("bar-goo", 3));
+    // After the first paint, so the pill visibly absorbs the current page's drop (touch screens).
+    requestAnimationFrame(() => requestAnimationFrame(() => topBar.classList.add("is-arrived")));
   }
+
+  // iOS Safari only applies :active (the touch press effect) when a touch listener exists.
+  document.addEventListener("touchstart", () => {}, { passive: true });
 
   if (stickyMenu) {
     stickyMenu.insertAdjacentHTML("beforeend", gooLayer("menu-goo", 4));

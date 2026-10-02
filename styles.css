@@ -1053,6 +1053,143 @@ section p {
   animation: goo-flash-all 600ms ease-out both;
 }
 
+/* Touch screens have no hover: a press squishes the drop, and on arrival the pill
+   absorbs the current page's drop (liquid-glass.js adds .is-arrived after first paint). */
+@media (hover: none) {
+  .home-page .top-bar .logo {
+    transition:
+      transform 350ms var(--glass-ease),
+      scale 450ms var(--glass-spring);
+  }
+
+  .home-page .top-bar .cv,
+  .home-page .top-bar .contact {
+    transition:
+      border-color 260ms ease 90ms,
+      background 300ms ease 90ms,
+      box-shadow 300ms ease 90ms,
+      scale 450ms var(--glass-spring);
+  }
+
+  .home-page .menu-items a {
+    transition:
+      transform 380ms var(--glass-ease),
+      background 300ms ease,
+      scale 450ms var(--glass-spring);
+  }
+
+  /* `scale` composes with the transforms the drops already use. */
+  .home-page .top-bar .logo:active,
+  .home-page .top-bar .cv:active,
+  .home-page .top-bar .contact:active,
+  .home-page .menu-items a:active {
+    scale: 0.82;
+    transition-duration: 90ms;
+  }
+
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) {
+    --pill-cut: var(--bar-cut-last);
+    /* Only the icon moves, so the hover target under the pointer stays put. */
+  }
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"])::before,
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .cv,
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .contact,
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .cv a,
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .bar-goo i {
+    transition-delay: 0ms;
+  }
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .cv {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: none;
+  }
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .bar-goo i:nth-child(2) {
+    animation: none;
+  }
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .cv a,
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .bar-goo i:nth-child(2) {
+    transform: translateX(calc(-1 * var(--cv-shift)));
+  }
+  .home-page .top-bar.is-arrived:has(.cv a[aria-current="page"]) .bar-goo {
+    animation: goo-flash-cv 600ms ease-out both;
+  }
+
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) {
+    --pill-cut: 0px;
+  }
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"])::before,
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .cv,
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .contact,
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .cv a,
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .bar-goo i {
+    transition-delay: 0ms;
+  }
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .cv,
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .contact {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: none;
+  }
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .bar-goo i:nth-child(2),
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .bar-goo i:nth-child(3) {
+    animation: none;
+  }
+  .home-page .top-bar.is-arrived:has(.contact a[aria-current="page"]) .bar-goo {
+    animation: goo-flash-all 600ms ease-out both;
+  }
+}
+
+@media (hover: none) {
+  /* Home: the logo marks the arrival, so the drops skip their split-off. */
+  .home-page .top-bar:has(.logo a[aria-current="page"]) .cv,
+  .home-page .top-bar:has(.logo a[aria-current="page"]) .contact,
+  .home-page .top-bar:has(.logo a[aria-current="page"]) .bar-goo,
+  .home-page .top-bar:has(.logo a[aria-current="page"]) .bar-goo i {
+    animation: none;
+  }
+
+  .home-page .top-bar.is-arrived .logo:has(a[aria-current="page"]) {
+    animation: logo-arrive 650ms ease-in-out;
+  }
+}
+
+@keyframes logo-arrive {
+  35% {
+    scale: 1.2;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.55);
+  }
+}
+
+/* Page changes keep the bar and the menu in place while the content crossfades. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+.home-page .top-bar {
+  view-transition-name: top-bar;
+}
+
+.home-page .sticky-menu {
+  view-transition-name: sticky-menu;
+}
+
+/* No crossfade for the bar: each page plays its own arrival animation instead. */
+::view-transition-old(top-bar) {
+  display: none;
+}
+
+::view-transition-new(top-bar) {
+  animation: none;
+}
+
 @keyframes drop-pinch {
   from {
     transform: translateX(-16px) scale(0.78);
@@ -1102,6 +1239,12 @@ section p {
   transition: box-shadow 350ms ease;
 }
 
+/* The sticky menu keeps flat glass: no glare along the top edge. */
+.home-page .sticky-menu .liquid-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), var(--glass-surface));
+  box-shadow: 0 14px 42px var(--glass-shadow), inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+}
+
 /* Neutralize the legacy label icon; the glyph below is the only +/×. */
 .home-page .menu-toggle-label::before,
 .home-page .menu-toggle-label::after {
@@ -1140,7 +1283,7 @@ section p {
 }
 
 .home-page .sticky-menu.is-open .menu-toggle-label {
-  box-shadow: 0 18px 46px rgba(29, 42, 48, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.52);
+  box-shadow: 0 18px 46px rgba(29, 42, 48, 0.26);
 }
 
 .home-page .sticky-menu.is-open .menu-toggle-label,
