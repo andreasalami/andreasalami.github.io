@@ -22,6 +22,10 @@
     <meta property="og:description" content="Hi! Welcome to my personal website. I'm Andrea Salami, based in Cremona, Italy. I'm a developer with a passion for technology, innovation, and social impact.">
     <meta property="og:url" content="https://andreasalami.github.io/">
     <meta property="og:image" content="https://andreasalami.github.io/images/andrea-salami.jpg">
+    <meta property="og:image:width" content="480">
+    <meta property="og:image:height" content="390">
+    <meta property="og:image:alt" content="Portrait of Andrea Salami">
+    <meta property="og:locale" content="en_US">
     <meta property="profile:first_name" content="Andrea">
     <meta property="profile:last_name" content="Salami">
     <meta name="twitter:card" content="summary">
@@ -34,13 +38,16 @@
                 "@type": "WebSite",
                 "@id": "https://andreasalami.github.io/#website",
                 "name": "Andrea Salami",
-                "url": "https://andreasalami.github.io/"
+                "url": "https://andreasalami.github.io/",
+                "inLanguage": "en",
+                "publisher": { "@id": "https://andreasalami.github.io/#person" }
             },
             {
                 "@type": "ProfilePage",
                 "@id": "https://andreasalami.github.io/#profilepage",
                 "url": "https://andreasalami.github.io/",
                 "name": "Andrea Salami – Developer in Cremona, Italy",
+                "inLanguage": "en",
                 "isPartOf": { "@id": "https://andreasalami.github.io/#website" },
                 "mainEntity": { "@id": "https://andreasalami.github.io/#person" }
             },
@@ -52,16 +59,50 @@
                 "familyName": "Salami",
                 "url": "https://andreasalami.github.io/",
                 "image": "https://andreasalami.github.io/images/andrea-salami.jpg",
-                "jobTitle": "Developer",
-                "description": "Developer based in Cremona, Italy, studying for a Master's Degree in Blockchain at Start2Impact University and vice president of the Amici di Agropolis association.",
+                "jobTitle": "Web Developer & Blockchain student",
+                "description": "Web developer based in Cremona, Italy, studying for a Master's Degree in Blockchain at Start2Impact University and vice president of the Amici di Agropolis association.",
                 "address": { "@type": "PostalAddress", "addressLocality": "Cremona", "addressCountry": "IT" },
+                "alumniOf": [
+                    { "@type": "CollegeOrUniversity", "name": "Start2Impact University", "url": "https://www.start2impact.it/" },
+                    { "@type": "CollegeOrUniversity", "name": "Università degli Studi di Brescia", "url": "https://www.unibs.it/" }
+                ],
                 "memberOf": { "@type": "Organization", "name": "Amici di Agropolis" },
-                "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "TypeScript", "Python", "Solidity", "Blockchain"],
+                "knowsLanguage": [
+                    { "@type": "Language", "name": "Italian", "alternateName": "it" },
+                    { "@type": "Language", "name": "English", "alternateName": "en" }
+                ],
+                "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Bootstrap", "Tailwind CSS", "Supabase", "Python", "Git", "Solidity", "Smart contracts", "Ethereum", "Blockchain"],
                 "sameAs": [
                     "https://www.linkedin.com/in/andrea-salami-204908209/",
                     "https://github.com/andreasalami",
                     "https://x.com/salami_andrea"
                 ]
+            },
+            {
+                "@type": "SoftwareSourceCode",
+                "name": "LAG – L'Agro ai Giovani app",
+                "description": "Mobile-first web app for the charity festival: programme, menu, orders, tickets and tournament for visitors, with content management for the staff.",
+                "url": "https://andreasalami.github.io/lag_app/",
+                "codeRepository": "https://github.com/andreasalami/lag_app",
+                "programmingLanguage": ["TypeScript", "React", "Tailwind CSS", "Supabase"],
+                "author": { "@id": "https://andreasalami.github.io/#person" }
+            },
+            {
+                "@type": "SoftwareSourceCode",
+                "name": "Counter App",
+                "description": "Split-screen counter with large increase and decrease buttons, a reset function and memory that keeps the count after a refresh.",
+                "url": "https://andreasalami.github.io/counter-appJS/",
+                "codeRepository": "https://github.com/andreasalami/counter-appJS",
+                "programmingLanguage": ["HTML", "CSS", "JavaScript"],
+                "author": { "@id": "https://andreasalami.github.io/#person" }
+            },
+            {
+                "@type": "SoftwareSourceCode",
+                "name": "Crypto Report",
+                "description": "Python tool that builds a crypto market report from CoinMarketCap API data.",
+                "codeRepository": "https://github.com/andreasalami/Python_Project_Crypto_Report",
+                "programmingLanguage": "Python",
+                "author": { "@id": "https://andreasalami.github.io/#person" }
             }
         ]
     }
@@ -79,7 +120,7 @@
             <a href="form.html" aria-label="Contact me"><i class="bi bi-envelope nav-icon" data-lucide="mail" aria-hidden="true"></i></a>
         </div>
     </nav>
-    <div class="background">
+    <main class="background">
         <div class="bio">
             <div class="row">
                 <div class="col-3 profile-image">
@@ -161,7 +202,8 @@
                 </div>
                 <div class="col-2 skills"> 
                     <h2>
-                        <i class="fas fa-tools"></i>
+                        <i class="fas fa-tools" aria-hidden="true"></i>
+                        <span class="visually-hidden">Tech stack</span>
                     </h2>
                     <br>
                     <h4>
@@ -237,7 +279,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     <div class="sticky-menu">
         <button type="button" class="menu-toggle-label liquid-glass" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sticky-navigation">
             <span class="menu-glyph" aria-hidden="true"></span>
