@@ -5,8 +5,8 @@
 This is Andrea Salami's personal website (https://andreasalami.github.io/). It is written in English. Andrea speaks Italian (native) and English (B2, FCE).
 
 - Skills: HTML, CSS, JavaScript, TypeScript, React, Bootstrap, Tailwind CSS, Supabase, Python, Git, Solidity and Ethereum smart contracts.
-- Work: copywriter on blockchain and technical topics (Syntralink, 2024–2025; Blockchain Solutions Italy, 2023), on-board courier (Modus Operations, 2021–2023), management-control clerk at Comune di Cremona.
-- Volunteering: long-time volunteer at Agropolis, board member of the Amici di Agropolis association since 2020 and vice president since 2025; organiser of L'Agro ai Giovani, the largest charity festival in Cremona, since 2018.
+- Work: event organizer at Agropolis Onlus (since September 2026); copywriter on blockchain and technical topics (Syntralink, 2024–2026; Blockchain Solutions Italy, 2023), on-board courier (Modus Operations, 2021–2023), management-control clerk at Comune di Cremona.
+- Volunteering: volunteer at Agropolis since 2013, board member of the Amici di Agropolis association since 2020 and vice president since 2025; organiser of L'Agro ai Giovani, the largest charity festival in Cremona, since 2018.
 
 ## Pages
 
