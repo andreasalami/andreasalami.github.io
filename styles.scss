@@ -1056,17 +1056,6 @@ section p {
   .home-page .top-bar .bar-goo i {
     animation: none;
   }
-
-  .home-page .top-bar.is-arrived .logo:has(a[aria-current="page"]) {
-    animation: logo-arrive 650ms ease-in-out;
-  }
-}
-
-@keyframes logo-arrive {
-  35% {
-    scale: 1.2;
-    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.55);
-  }
 }
 
 @keyframes drop-pinch {
